@@ -1,0 +1,30 @@
+{
+    "name": "c-base Spacecraft",
+    "identifier": "sc",
+    "subsystems": [
+        {
+            "name": "Bar",
+            "identifier": "bar",
+            "measurements": [
+                {
+                    "name": "Status",
+                    "identifier": "bar.state",
+                    "units": "none",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "Power",
+            "identifier": "system",
+            "measurements": [
+                {
+                    "name": "Load",
+                    "identifier": "system.powermon.load",
+                    "units": "kWh",
+                    "type": "integer"
+                }
+            ]
+        }
+    ]
+}
