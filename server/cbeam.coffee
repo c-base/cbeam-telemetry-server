@@ -45,13 +45,18 @@ exports.findExposedKeys = (dictionary) ->
     for measurement in system.measurements
       keys.push measurement.identifier
   return keys
-
+unhandled = [] 
 exports.filterMessages = (topic, msg, dictionary) ->
   msgs = exports.normalizeMessage topic, msg
   return [] unless msgs.length
   keys = exports.findExposedKeys dictionary
   #console.log keys, msgs.map (msg) -> msg.id
-  msgs.filter (msg) -> keys.indexOf(msg.id) isnt -1
+  msgs.filter (msg) ->
+    return true if keys.indexOf(msg.id) isnt -1
+    return false if unhandled.indexOf(msg.id) isnt -1
+    unhandled.push msg.id
+    console.log "Unhandled key #{msg.id}: #{msg.value}"
+    false
 
 main = ->
   exports.connect (err, client) ->
