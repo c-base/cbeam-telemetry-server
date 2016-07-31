@@ -3,6 +3,18 @@
     "identifier": "sc",
     "subsystems": [
         {
+            "name": "Org",
+            "identifier": "c-base",
+            "measurements": [
+                {
+                    "name": "Members",
+                    "identifier": "c-base.crew.members",
+                    "units": "crew",
+                    "type": "integer"
+                }
+            ]
+        },
+        {
             "name": "Bar",
             "identifier": "bar",
             "measurements": [
