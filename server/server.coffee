@@ -25,13 +25,10 @@ exports.handleConnection = (server, socket) ->
         type: 'dictionary'
         value: server.dictionary
     subscribe: (id) ->
-      console.log "SUB: #{id}"
       subscriptions[id] = true
     unsubscribe: (id) ->
-      console.log "UNSUB: #{id}"
       delete subscriptions[id]
     history: (id) ->
-      console.log "HIST: #{id}", server.histories[id]
       socket.send JSON.stringify
         type: 'history'
         id: id
@@ -39,10 +36,8 @@ exports.handleConnection = (server, socket) ->
 
   notify = ->
     for id, value of subscriptions
-      console.log "NOTIFY", id
       history = server.histories[id]
       continue unless history
-      console.log history.length
       socket.send JSON.stringify
         type: 'data'
         id: id
@@ -82,7 +77,6 @@ main = ->
         server.histories[msg.id].push
           timestamp: Date.now()
           value: msg.value
-        console.log server.histories
       server.listeners.forEach (listener) ->
         do listener
     server.wss.on 'connection', (socket) ->
