@@ -61,6 +61,18 @@
                     "identifier": "ingress.status.a6301120831b46f1be00fa2cb0bce195.16.level",
                     "units": "none",
                     "type": "integer"
+                },
+                {
+                    "name": "Portal health",
+                    "identifier": "ingress.status.a6301120831b46f1be00fa2cb0bce195.16.health",
+                    "units": "%",
+                    "type": "integer"
+                },
+                {
+                    "name": "Controlling faction",
+                    "identifier": "ingress.status.a6301120831b46f1be00fa2cb0bce195.16.controllingFaction",
+                    "units": "none",
+                    "type": "string"
                 }
             ]
         }
