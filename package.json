@@ -1,0 +1,29 @@
+{
+  "name": "cbeam-telemetry-server",
+  "version": "0.0.1",
+  "description": "OpenMCT Telemetry Server for c-beam",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/c-base/cbeam-telemetry-server.git"
+  },
+  "keywords": [
+    "openmct",
+    "cbase",
+    "mqtt"
+  ],
+  "author": "Henri Bergius <henri.bergius@iki.fi>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/c-base/cbeam-telemetry-server/issues"
+  },
+  "homepage": "https://github.com/c-base/cbeam-telemetry-server#readme",
+  "dependencies": {
+    "coffee-script": "^1.10.0",
+    "mqtt": "^1.13.0",
+    "ws": "^1.1.1"
+  }
+}
