@@ -4,7 +4,8 @@
   "description": "OpenMCT Telemetry Server for c-beam",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "start": "coffee server/server.coffee"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/c-base/cbeam-telemetry-server#readme",
   "dependencies": {
     "coffee-script": "^1.10.0",
+    "debug": "^2.2.0",
     "mqtt": "^1.13.0",
     "ws": "^1.1.1"
   }
