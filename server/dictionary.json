@@ -47,7 +47,7 @@
                     "name": "Time",
                     "identifier": "info.time",
                     "units": "none",
-                    "type": "string"
+                    "type": "utc"
                 }
             ]
         },
