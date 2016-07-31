@@ -50,7 +50,19 @@
                     "type": "string"
                 }
             ]
-        }
+        },
          
+        {
+            "name": "Ingress c-base portal",
+            "identifier": "ingress",
+            "measurements": [
+                {
+                    "name": "Portal level",
+                    "identifier": "ingress.status.a6301120831b46f1be00fa2cb0bce195.16.level",
+                    "units": "none",
+                    "type": "integer"
+                }
+            ]
+        }
     ]
 }
