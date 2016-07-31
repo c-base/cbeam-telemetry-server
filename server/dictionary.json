@@ -1,5 +1,5 @@
 {
-    "name": "c-base Spacecraft",
+    "name": "c-base space station",
     "identifier": "sc",
     "subsystems": [
         {
@@ -15,11 +15,11 @@
             ]
         },
         {
-            "name": "Power",
+            "name": "System",
             "identifier": "system",
             "measurements": [
                 {
-                    "name": "Load",
+                    "name": "Electric Load",
                     "identifier": "system.powermon.load",
                     "units": "kWh",
                     "type": "integer"
