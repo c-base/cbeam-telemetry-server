@@ -37,6 +37,20 @@
                     "type": "integer"
                 }
             ]
+        },
+         
+        {
+            "name": "Time",
+            "identifier": "time",
+            "measurements": [
+                {
+                    "name": "Time",
+                    "identifier": "info.time",
+                    "units": "none",
+                    "type": "string"
+                }
+            ]
         }
+         
     ]
 }
