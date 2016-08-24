@@ -55,7 +55,7 @@ exports.filterMessages = (topic, msg, dictionary) ->
     return true if keys.indexOf(msg.id) isnt -1
     return false if unhandled.indexOf(msg.id) isnt -1
     unhandled.push msg.id
-    console.log "Unhandled key #{msg.id}: #{msg.value}"
+    console.log "Unhandled key #{msg.id}: #{JSON.stringify(msg.value)}"
     false
 
 main = ->
