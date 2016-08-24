@@ -12,13 +12,30 @@ exports.connect = (callback) ->
     callback err
     callback = null
 
+explodeKeys = (identifier, message) ->
+  msgs = []
+  unless typeof message is 'object'
+    msgs.push
+      id: identifier
+      value: message
+    return msgs
+
+  if Array.isArray message
+    for val, key in message
+      msgs = msgs.concat explodeKeys "#{identifier}.#{key}", val
+    return msgs
+
+  for key, val of message
+    msgs = msgs.concat explodeKeys "#{identifier}.#{key}", val
+  return msgs
+
 exports.normalizeMessage = (topic, msg) ->
   identifier = topic.replace /\//g, '.'
   message = msg.toString()
   msgs = []
 
   # Handle JSON messages
-  if message.indexOf '{' isnt -1
+  if message.indexOf '{' isnt -1 or message.indexOf '[' isnt -1
     try
       message = JSON.parse message
     catch e
@@ -26,12 +43,7 @@ exports.normalizeMessage = (topic, msg) ->
         id: identifier
         value: message
       return msgs
-
-    for key, value of message
-      msgs.push
-        id: "#{identifier}.#{key}"
-        value: value
-    return msgs
+    return explodeKeys identifier, message
 
   msgs.push
     id: identifier
