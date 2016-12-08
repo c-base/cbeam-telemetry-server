@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/c-base/cbeam-telemetry-server#readme",
   "dependencies": {
-    "coffee-script": "^1.10.0",
+    "coffee-script": "^1.12.1",
     "debug": "^2.2.0",
     "mqtt": "^2.1.3",
     "ws": "^1.1.1"
