@@ -16,6 +16,19 @@ class Server
           res.json dict.toJSON()
           return
       res.status(404).end()
+    @app.get '/telemetry/:pointId', (req, res) =>
+      start = parseInt req.query.start
+      end = parseInt req.query.end
+      ids = req.params.pointId.split ','
+      console.log ids
+      histories = @histories
+      response = ids.reduce (resp, id) ->
+        histories[id] = [] unless histories[id]
+        resp.concat histories[id].filter (p) ->
+          p.timestamp > start and p.timestamp < end
+      , []
+      res.json response
+      return
 
   start: (callback) ->
     @wss = new ws.Server
