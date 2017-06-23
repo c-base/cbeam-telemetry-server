@@ -45,6 +45,7 @@ class History
       return callback new Error 'Not connected to InfluxDB'
     @client.writePoints([
       measurement: @prepareId point.id
+      timestamp: point.timestamp
       fields:
         value: point.value
     ])
