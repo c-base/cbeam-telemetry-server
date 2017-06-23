@@ -27,6 +27,7 @@
     "coffee-script": "^1.12.1",
     "debug": "^2.6.0",
     "express": "^4.15.3",
+    "influx": "^5.0.7",
     "mqtt": "^2.3.0",
     "openmct": "nasa/openmct",
     "ws": "^1.1.1"

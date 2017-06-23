@@ -41,7 +41,11 @@ var server = new app.Server({
   port: process.env.PORT || 8080,
   wss_port: process.env.WSS_PORT || 8082,
   broker: process.env.MSGFLO_BROKER || 'mqtt://localhost',
-  dictionaries: [eva]
+  dictionaries: [eva],
+  history: {
+    host: process.env.INFLUX_HOST || 'localhost',
+    db: process.env.INFLUX_DB || 'cbeam'
+  }
 });
 server.start(function (err) {
   if (err) {
