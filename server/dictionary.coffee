@@ -5,6 +5,21 @@ class Dictionary
   addMeasurement: (name, key, values, callback) ->
     unless callback
       callback = (val) -> val
+
+    if values.length
+      values[0].name = 'Value'
+      values[0].key = 'value'
+      values[0].hints =
+        range: 1
+
+    values.push
+      key: 'utc'
+      source: 'timestamp'
+      name: 'Timestamp'
+      format: 'utc'
+      hints:
+        domain: 1
+
     @measurements[key] =
       name: name
       key: key

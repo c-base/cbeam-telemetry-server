@@ -23,7 +23,7 @@ var objectProvider = function (config) {
                 return {
                     identifier: identifier,
                     name: measurement.name,
-                    type: config.namespace,
+                    type: config.type,
                     telemetry: {
                         values: measurement.values
                     },
@@ -66,9 +66,9 @@ var DictionaryPlugin = function (dictionary) {
 
         openmct.composition.addProvider(compositionProvider(dictionary));
 
-        openmct.types.addType(dictionary.namespace, {
-            name: 'Example Telemetry Point',
-            description: 'Example telemetry point from our happy tutorial.',
+        openmct.types.addType(dictionary.type, {
+            name: 'EVA1',
+            description: 'c-base EVA unit',
             cssClass: 'icon-telemetry'
         });
     };

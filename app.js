@@ -2,11 +2,13 @@ var app = require('./server/app');
 
 // Configure EVA unit 1
 var eva = new app.Dictionary('EVA1', 'eva1');
-eva.addMeasurement('temperature', 'eva1.temperature', [
-{
-  units: 'degrees',
-  format: 'integer'
-}
+eva.addMeasurement('temperature', 'prop.temperature', [
+  {
+    units: 'degrees',
+    format: 'integer',
+    min: 0,
+    max: 100
+  }
 ]);
 
 // Start the server
