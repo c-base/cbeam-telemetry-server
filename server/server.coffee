@@ -1,11 +1,12 @@
 cbeam = require './cbeam'
+history = require './history'
 express = require 'express'
 ws = require 'ws'
 
 class Server
-  histories: {}
   listeners: []
   constructor: (@config) ->
+    @history = new history @config
     @app = express()
 
     @app.use express.static 'assets'
@@ -20,13 +21,12 @@ class Server
       start = parseInt req.query.start
       end = parseInt req.query.end
       ids = req.params.pointId.split ','
-      histories = @histories
-      response = ids.reduce (resp, id) ->
-        histories[id] = [] unless histories[id]
-        resp.concat histories[id].filter (p) ->
-          p.timestamp > start and p.timestamp < end
-      , []
-      res.json response
+      @history.query ids[0], start, end, (err, response) ->
+        if err
+          console.log err
+          res.status(500).end()
+          return
+        res.json response
       return
 
   start: (callback) ->
@@ -36,9 +36,11 @@ class Server
       return callback err if err
       cbeam.connect @config, (err, client) =>
         return callback err if err
-        @cbeam = client
-        do @subscribe
-        callback null
+        @history.connect (err) =>
+          return callback err if err
+          @cbeam = client
+          do @subscribe
+          callback null
 
   subscribe: ->
     # Subscribe to all messages
@@ -51,8 +53,8 @@ class Server
           id: msg.id
           value: msg.value
           timestamp: Date.now()
-        @histories[point.id] = [] unless @histories[point.id]
-        @histories[point.id].push point
+        @history.record point, (err) ->
+          console.log err if err
         @listeners.forEach (listener) ->
           listener point
     @wss.on 'connection', (socket) =>
