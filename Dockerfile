@@ -19,7 +19,7 @@ RUN npm install
 # Build OpenMCT
 WORKDIR /var/cbeam-telemetry-server/node_modules/openmct
 RUN npm install
-RUN node ./node_modules/bower/bin/bower install
+RUN node ./node_modules/bower/bin/bower install --allow-root
 RUN node ./node_modules/gulp/bin/gulp.js install
 
 # Go back up
