@@ -20,7 +20,6 @@ class Server
       start = parseInt req.query.start
       end = parseInt req.query.end
       ids = req.params.pointId.split ','
-      console.log ids
       histories = @histories
       response = ids.reduce (resp, id) ->
         histories[id] = [] unless histories[id]
@@ -48,12 +47,14 @@ class Server
       messages = cbeam.filterMessages topic, msg, @config.dictionaries
       return unless messages.length
       for msg in messages
-        @histories[msg.id] = [] unless @histories[msg.id]
-        @histories[msg.id].push
-          timestamp: Date.now()
+        point =
+          id: msg.id
           value: msg.value
-      @listeners.forEach (listener) ->
-        do listener
+          timestamp: Date.now()
+        @histories[point.id] = [] unless @histories[point.id]
+        @histories[point.id].push point
+        @listeners.forEach (listener) ->
+          listener point
     @wss.on 'connection', (socket) =>
       exports.handleConnection @, socket
 
@@ -67,14 +68,10 @@ exports.handleConnection = (server, socket) ->
     unsubscribe: (id) ->
       delete subscriptions[id]
 
-  notify = ->
+  notify = (msg) ->
     for id, value of subscriptions
-      history = server.histories[id]
-      continue unless history
-      socket.send JSON.stringify
-        type: 'data'
-        id: id
-        value: history[history.length - 1]
+      continue unless msg.id is id
+      socket.send JSON.stringify msg
 
   # Listen for requests
   socket.on 'message', (message) ->
