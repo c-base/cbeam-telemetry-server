@@ -1,19 +1,25 @@
-config = require './config'
 cbeam = require './cbeam'
+express = require 'express'
 ws = require 'ws'
 
-exports.initialize = (callback) ->
+exports.initialize = (config, callback) ->
   server =
     wss: new ws.Server
-      port: config.port
+      port: config.wss_port
+    app: express()
     histories: {}
     listeners: []
     dictionary: require config.dictionary
 
-  cbeam.connect (err, client) ->
+  server.app.use express.static 'assets'
+  server.app.use '/node_modules/openmct', express.static 'node_modules/openmct'
+
+  server.app.listen config.port, (err) ->
     return callback err if err
-    server.cbeam = client
-    callback null, server
+    cbeam.connect (err, client) ->
+      return callback err if err
+      server.cbeam = client
+      callback null, server
 
 exports.handleConnection = (server, socket) ->
   # Topics subscribed by this connection
@@ -60,12 +66,14 @@ exports.handleConnection = (server, socket) ->
   # Register listener
   server.listeners.push notify
 
-main = ->
-  exports.initialize (err, server) ->
+main = (config) ->
+  exports.initialize config, (err, server) ->
     if err
       console.error err
       process.exit 1
-    console.log "c-beam telemetry provider running on port #{config.port}"
+    console.log "c-beam telemetry server running on port #{config.port}"
+    console.log "c-beam telemetry provider running on port #{config.wss_port}"
+    console.log "Open c-beam telemetry server at http://#{config.host}:#{config.port}"
 
     # Subscribe to all messages
     server.cbeam.subscribe '#'
@@ -82,4 +90,6 @@ main = ->
     server.wss.on 'connection', (socket) ->
       exports.handleConnection server, socket
 
-main() unless module.parent
+unless module.parent
+  config = require './config'
+  main config
