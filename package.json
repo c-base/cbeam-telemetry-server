@@ -6,7 +6,7 @@
   "scripts": {
     "test": "grunt test",
     "postinstall": "cd node_modules/openmct && npm install",
-    "start": "coffee server/server.coffee"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

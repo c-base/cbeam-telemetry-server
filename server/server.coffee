@@ -2,24 +2,30 @@ cbeam = require './cbeam'
 express = require 'express'
 ws = require 'ws'
 
-exports.initialize = (config, callback) ->
-  server =
-    wss: new ws.Server
-      port: config.wss_port
-    app: express()
-    histories: {}
-    listeners: []
-    dictionary: require config.dictionary
+class Server
+  histories: {}
+  listeners: []
+  constructor: (@config) ->
+    @app = express()
 
-  server.app.use express.static 'assets'
-  server.app.use '/node_modules/openmct', express.static 'node_modules/openmct'
+    @app.use express.static 'assets'
+    @app.use '/node_modules/openmct', express.static 'node_modules/openmct'
+    @app.get '/dictionary/:dict.json', (req, res) =>
+      for dict in @config.dictionaries
+        if dict.key is req.params.dict
+          res.json dict.toJSON()
+          return
+      res.status(404).end()
 
-  server.app.listen config.port, (err) ->
-    return callback err if err
-    cbeam.connect (err, client) ->
+  start: (callback) ->
+    @wss = new ws.Server
+      port: @config.wss_port
+    @app.listen @config.port, (err) =>
       return callback err if err
-      server.cbeam = client
-      callback null, server
+      cbeam.connect (err, client) =>
+        return callback err if err
+        @cbeam = client
+        callback null
 
 exports.handleConnection = (server, socket) ->
   # Topics subscribed by this connection
@@ -90,6 +96,4 @@ main = (config) ->
     server.wss.on 'connection', (socket) ->
       exports.handleConnection server, socket
 
-unless module.parent
-  config = require './config'
-  main config
+module.exports = Server
