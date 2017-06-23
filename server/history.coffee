@@ -24,7 +24,7 @@ class History
         table =
           measurement: k
           fields:
-            value: @toInfluxType val.format
+            value: @toInfluxType val.values[0].format
           tags: []
         schema.push table
     return schema
