@@ -1,4 +1,6 @@
 module.exports =
-  port: process.env.PORT or 8081
-  broker: process.env.MQTT_BROKER or 'mqtt://10.0.1.17'
+  host: process.env.HOST or 'localhost'
+  port: process.env.PORT or 8080
+  wss_port: process.env.PORT or 8082
+  broker: process.env.MSGFLO_BROKER or 'mqtt://localhost'
   dictionary: './dictionary.json'

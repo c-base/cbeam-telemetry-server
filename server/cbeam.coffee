@@ -1,7 +1,6 @@
-config = require './config'
 mqtt = require 'mqtt'
 
-exports.connect = (callback) ->
+exports.connect = (config, callback) ->
   client = mqtt.connect config.broker
   client.on 'connect', ->
     return unless callback
@@ -12,63 +11,46 @@ exports.connect = (callback) ->
     callback err
     callback = null
 
-explodeKeys = (identifier, message) ->
-  msgs = []
-  unless typeof message is 'object'
-    msgs.push
-      id: identifier
-      value: message
-    return msgs
-
-  if Array.isArray message
-    for val, key in message
-      msgs = msgs.concat explodeKeys "#{identifier}.#{key}", val
-    return msgs
-
-  for key, val of message
-    msgs = msgs.concat explodeKeys "#{identifier}.#{key}", val
-  return msgs
-
 exports.normalizeMessage = (topic, msg) ->
   identifier = topic.replace /\//g, '.'
   message = msg.toString()
   msgs = []
-
-  # Handle JSON messages
-  if message.indexOf '{' isnt -1 or message.indexOf '[' isnt -1
-    try
-      message = JSON.parse message
-    catch e
-      msgs.push
-        id: identifier
-        value: message
-      return msgs
-    return explodeKeys identifier, message
-
   msgs.push
     id: identifier
     value: message
   return msgs
 
-exports.findExposedKeys = (dictionary) ->
+unhandled = []
+
+exports.getSubscribedKeys = (dictionaries) ->
   keys = []
-  for system in dictionary.subsystems
-    continue unless system.measurements?.length
-    for measurement in system.measurements
-      keys.push measurement.identifier
-  return keys
-unhandled = [] 
-exports.filterMessages = (topic, msg, dictionary) ->
+  for dictionary in dictionaries
+    for key, val of dictionary.measurements
+      keys.push key
+  keys
+exports.getKeyHandler = (dictionaries, key) ->
+  keys = []
+  for dictionary in dictionaries
+    for k, val of dictionary.measurements
+      continue unless k is key
+      return val.callback
+  null
+
+exports.filterMessages = (topic, msg, dictionaries) ->
   msgs = exports.normalizeMessage topic, msg
   return [] unless msgs.length
-  keys = exports.findExposedKeys dictionary
-  #console.log keys, msgs.map (msg) -> msg.id
-  msgs.filter (msg) ->
+  keys = exports.getSubscribedKeys dictionaries
+  handled = msgs.filter (msg) ->
     return true if keys.indexOf(msg.id) isnt -1
     return false if unhandled.indexOf(msg.id) isnt -1
     unhandled.push msg.id
     console.log "Unhandled key #{msg.id}: #{JSON.stringify(msg.value)}"
     false
+  handled.map (msg) ->
+    handler = exports.getKeyHandler dictionaries, msg.id
+    return msg unless handler
+    msg.value = handler msg.value
+    msg
 
 main = ->
   exports.connect (err, client) ->

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>c-beam telemetry server</title>
+    <script src="node_modules/openmct/dist/openmct.js"></script>
+    <script src="lib/http.js"></script>
+    <script src="dictionary-plugin.js"></script>
+    <script src="historical-telemetry-plugin.js"></script>
+    <script src="realtime-telemetry-plugin.js"></script>
+</head>
+<body>
+    <script>
+        openmct.setAssetPath('node_modules/openmct/dist');
+
+        // Bundled plugins
+        openmct.install(openmct.plugins.LocalStorage());
+        openmct.install(openmct.plugins.MyItems());
+        openmct.install(openmct.plugins.UTCTimeSystem());
+        openmct.time.clock('local', {start: -5 * 60 * 1000, end: 0});
+        openmct.time.timeSystem('utc');
+        openmct.install(openmct.plugins.Espresso());
+
+        // Local plugins
+        openmct.install(DictionaryPlugin({
+          key: 'eva1',
+          type: 'cbase.telemetry',
+          namespace: 'cbase.taxonomy'
+        }));
+        openmct.install(HistoricalTelemetryPlugin([
+          'cbase.telemetry'
+        ]));
+        openmct.install(RealtimeTelemetryPlugin([
+          'cbase.telemetry'
+        ]));
+
+        openmct.start();
+    </script>
+</body>
+</html>
