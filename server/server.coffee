@@ -11,6 +11,9 @@ class Server
 
     @app.use express.static 'assets'
     @app.use '/node_modules/openmct', express.static 'node_modules/openmct'
+    @app.set 'view engine', 'ejs'
+    @app.get '/', (req, res) =>
+      res.render 'index', @config
     @app.get '/dictionary/:dict.json', (req, res) =>
       for dict in @config.dictionaries
         if dict.key is req.params.dict
