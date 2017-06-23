@@ -7,23 +7,21 @@ This is a telemetry server for connecting the NASA [OpenMCT](https://nasa.github
 
 ## Installation
 
-* Install OpenMCT following [its instructions](https://nasa.github.io/openmct/getting-started/)
-* Make a local clone of this repository
-* Copy the contents of `bundle` folder under OpenMCT `tutorials/telemetry` folder
-* Add a `bundles.json` to your OpenMCT and [enable `tutorials/telemetry`](http://nasa.github.io/openmct/docs/tutorials/#step-1-add-a-top-level-object)
-* `npm install` in the telemetry server root folder
-* `npm start` the telemetry server
-* `npm start` OpenMCT
+* Install the dependencies with `npm install`
 
-Note: you have to be in the c-base crew network for this to work.
+## Running
+
+* Start the service with `npm start`
+
+If you want to change the MQTT broker address, set the `MSGFLO_BROKER` environment variable before starting the service.
 
 ## Adding information sources
 
-c-beam topics are mapped to OpenMCT data in `server/dictionary.json`.
+c-beam topics are mapped to OpenMCT data in `app.js`.
 
 ## TODOs
 
-* Easier OpenMCT setup
+* Make actual MsgFlo participant
 * Mapping more c-beam data
 * Custom displays combining different data points (like a green/red bar status UI)
 * UIs for station functionality
