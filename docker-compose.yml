@@ -11,7 +11,7 @@ services:
     container_name: influxdb
     ports:
       - '127.0.0.1:8086:8086'
-  msgflo:
+  openmct:
     build: .
     container_name: cbeam-telemetry-server
     environment:
