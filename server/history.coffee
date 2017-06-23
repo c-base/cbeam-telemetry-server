@@ -65,7 +65,7 @@ class History
     query = "
       select value from #{@prepareId(id)}
       where time > '#{startString}' and time < '#{endString}'
-      order by time desc;
+      order by time asc;
     "
     @client.query(query)
     .then (result) ->
