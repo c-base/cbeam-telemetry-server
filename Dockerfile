@@ -16,4 +16,11 @@ COPY . /var/cbeam-telemetry-server
 # Install MsgFlo and dependencies
 RUN npm install
 
+# Build OpenMCT
+WORKDIR /var/cbeam-telemetry-server/node_modules/openmct
+RUN npm install
+
+# Go back up
+WORKDIR /var/cbeam-telemetry-server
+
 CMD npm start
