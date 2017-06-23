@@ -1,0 +1,9 @@
+language: node_js
+dist: trusty
+sudo: false
+node_js:
+- '6'
+services:
+- docker
+script:
+- docker-compose up -d
