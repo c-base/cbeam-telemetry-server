@@ -18,7 +18,8 @@
         status: req.status,
         request: req
     };
-    if (req.getResponseHeader('Content-Type').indexOf('application/json') !== -1) {
+    var contentType = req.getResponseHeader('Content-Type');
+    if (contentType && contentType.indexOf('application/json') !== -1) {
         response.data = JSON.parse(response.data);
     }
     return response;
