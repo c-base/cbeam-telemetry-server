@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
+    "postinstall": "cd node_modules/openmct && npm install",
     "start": "coffee server/server.coffee"
   },
   "repository": {
@@ -26,6 +27,7 @@
     "coffee-script": "^1.12.1",
     "debug": "^2.6.0",
     "mqtt": "^2.3.0",
+    "openmct": "nasa/openmct",
     "ws": "^1.1.1"
   }
 }
