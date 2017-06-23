@@ -2,12 +2,36 @@ var app = require('./server/app');
 
 // Configure EVA unit 1
 var eva = new app.Dictionary('EVA1', 'eva1');
-eva.addMeasurement('temperature', 'prop.temperature', [
+eva.addMeasurement('temperature', 'EVA1.temp', [
   {
     units: 'degrees',
     format: 'integer',
     min: 0,
     max: 100
+  }
+]);
+eva.addMeasurement('luminosity', 'EVA1.lum', [
+  {
+    units: 'points',
+    format: 'integer',
+    min: 0,
+    max: 255
+  }
+]);
+eva.addMeasurement('hall', 'EVA1.hall', [
+  {
+    units: 'points',
+    format: 'integer',
+    min: 0,
+    max: 255
+  }
+]);
+eva.addMeasurement('counter', 'EVA1.cnt', [
+  {
+    units: 'points',
+    format: 'integer',
+    min: 0,
+    max: 255
   }
 ]);
 
