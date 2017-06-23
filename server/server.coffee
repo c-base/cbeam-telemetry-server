@@ -35,29 +35,37 @@ class Server
       port: @config.wss_port
     @app.listen @config.port, (err) =>
       return callback err if err
-      cbeam.connect (err, client) =>
+      cbeam.connect @config, (err, client) =>
         return callback err if err
         @cbeam = client
+        do @subscribe
         callback null
+
+  subscribe: ->
+    # Subscribe to all messages
+    @cbeam.subscribe '#'
+    @cbeam.on 'message', (topic, msg) =>
+      messages = cbeam.filterMessages topic, msg, @config.dictionaries
+      return unless messages.length
+      for msg in messages
+        @histories[msg.id] = [] unless @histories[msg.id]
+        @histories[msg.id].push
+          timestamp: Date.now()
+          value: msg.value
+      @listeners.forEach (listener) ->
+        do listener
+    @wss.on 'connection', (socket) =>
+      exports.handleConnection @, socket
 
 exports.handleConnection = (server, socket) ->
   # Topics subscribed by this connection
   subscriptions = {}
 
   handlers =
-    dictionary: ->
-      socket.send JSON.stringify
-        type: 'dictionary'
-        value: server.dictionary
     subscribe: (id) ->
       subscriptions[id] = true
     unsubscribe: (id) ->
       delete subscriptions[id]
-    history: (id) ->
-      socket.send JSON.stringify
-        type: 'history'
-        id: id
-        value: server.histories[id]
 
   notify = ->
     for id, value of subscriptions
@@ -94,19 +102,5 @@ main = (config) ->
     console.log "c-beam telemetry provider running on port #{config.wss_port}"
     console.log "Open c-beam telemetry server at http://#{config.host}:#{config.port}"
 
-    # Subscribe to all messages
-    server.cbeam.subscribe '#'
-    server.cbeam.on 'message', (topic, msg) ->
-      messages = cbeam.filterMessages topic, msg, server.dictionary
-      return unless messages.length
-      for msg in messages
-        server.histories[msg.id] = [] unless server.histories[msg.id]
-        server.histories[msg.id].push
-          timestamp: Date.now()
-          value: msg.value
-      server.listeners.forEach (listener) ->
-        do listener
-    server.wss.on 'connection', (socket) ->
-      exports.handleConnection server, socket
 
 module.exports = Server
