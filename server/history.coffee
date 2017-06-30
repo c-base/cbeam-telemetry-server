@@ -22,7 +22,7 @@ class History
     for dictionary in @config.dictionaries
       for k, val of dictionary.measurements
         table =
-          measurement: k
+          measurement: @prepareId k
           fields:
             value: @toInfluxType val.values[0].format
           tags: []
@@ -54,7 +54,11 @@ class History
     .catch (e) ->
       callback e
 
-  prepareId: (id) ->
+  prepareId: (key) ->
+    id = key
+    for dictionary in @config.dictionaries
+      continue unless dictionary.measurements[key]
+      id = dictionary.measurements[key].options.timeseries
     id.replace /\./g, '_'
 
   query: (id, start, end, callback) ->

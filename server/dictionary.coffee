@@ -2,9 +2,15 @@ class Dictionary
   constructor: (@name, @key) ->
     @measurements = {}
 
-  addMeasurement: (name, key, values, callback) ->
+  addMeasurement: (name, key, values, options, callback) ->
+    if typeof options is 'function'
+      callback = options
     unless callback
       callback = (val) -> val
+    unless options
+      options = {}
+    unless options.timeseries
+      options.timeseries = key
 
     if values.length
       values[0].name = 'Value'
@@ -25,6 +31,7 @@ class Dictionary
       key: key
       values: values
       callback: callback
+      options: options
 
   toJSON: ->
     def =
