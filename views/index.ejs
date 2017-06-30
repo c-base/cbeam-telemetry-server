@@ -23,17 +23,21 @@
         openmct.install(openmct.plugins.Espresso());
 
         // Local plugins
+        <% var types = []; %>
+        <% for (var i=0; i<dictionaries.length; i++) { %>
         openmct.install(DictionaryPlugin({
-          key: 'eva1',
-          type: 'cbase.telemetry',
-          namespace: 'cbase.taxonomy'
+          key: '<%= dictionaries[i].key %>',
+          type: '<%= dictionaries[i].key %>.telemetry',
+          namespace: '<%= dictionaries[i].key %>.taxonomy'
         }));
-        openmct.install(HistoricalTelemetryPlugin([
-          'cbase.telemetry'
-        ]));
-        openmct.install(RealtimeTelemetryPlugin([
-          'cbase.telemetry'
-        ]));
+          <% types.push(dictionaries[i].key + '.telemetry'); %>
+        <% } %>
+        openmct.install(HistoricalTelemetryPlugin([<% for (var i=0; i<types.length; i++) { %>
+            '<%= types[i] %>'<% if (i < types.length - 1) { %>,<% } %>
+        <% } %>]));
+        openmct.install(RealtimeTelemetryPlugin([<% for (var i=0; i<types.length; i++) { %>
+            '<%= types[i] %>'<% if (i < types.length - 1) { %>,<% } %>
+        <% } %>]));
 
         openmct.start();
     </script>
