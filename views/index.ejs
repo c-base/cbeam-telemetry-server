@@ -20,20 +20,24 @@
         var ONE_DAY = ONE_HOUR * 24;
         openmct.time.clock('local', {start: -ONE_DAY, end: 0});
         openmct.time.timeSystem('utc');
-        openmct.install(openmct.plugins.Espresso());
+        openmct.install(openmct.plugins.<%= theme %>());
 
         // Local plugins
+        <% var types = []; %>
+        <% for (var i=0; i<dictionaries.length; i++) { %>
         openmct.install(DictionaryPlugin({
-          key: 'eva1',
-          type: 'cbase.telemetry',
-          namespace: 'cbase.taxonomy'
+          key: '<%= dictionaries[i].key %>',
+          type: '<%= dictionaries[i].key %>.telemetry',
+          namespace: '<%= dictionaries[i].key %>.taxonomy'
         }));
-        openmct.install(HistoricalTelemetryPlugin([
-          'cbase.telemetry'
-        ]));
-        openmct.install(RealtimeTelemetryPlugin([
-          'cbase.telemetry'
-        ]));
+          <% types.push(dictionaries[i].key + '.telemetry'); %>
+        <% } %>
+        openmct.install(HistoricalTelemetryPlugin([<% for (var i=0; i<types.length; i++) { %>
+            '<%= types[i] %>'<% if (i < types.length - 1) { %>,<% } %>
+        <% } %>]));
+        openmct.install(RealtimeTelemetryPlugin([<% for (var i=0; i<types.length; i++) { %>
+            '<%= types[i] %>'<% if (i < types.length - 1) { %>,<% } %>
+        <% } %>]));
 
         openmct.start();
     </script>
