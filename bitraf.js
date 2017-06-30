@@ -10,7 +10,8 @@ floor2.addMeasurement('temperature', 'floor2_temperature', [
     max: 100
   }
 ], {
-  topic: 'bitraf/temperature/1'
+  topic: 'bitraf/temperature/1',
+  timeseries: 'Temperature1'
 });
 floor2.addMeasurement('humidity', 'floor2_humidity', [
   {
@@ -20,7 +21,8 @@ floor2.addMeasurement('humidity', 'floor2_humidity', [
     max: 100
   }
 ], {
-  topic: 'bitraf/humidity/1'
+  topic: 'bitraf/humidity/1',
+  timeseries: 'Humidity1'
 });
 var floor4 = new app.Dictionary('4th floor', 'floor4');
 floor4.addMeasurement('temperature', 'floor4_temperature', [
@@ -31,7 +33,8 @@ floor4.addMeasurement('temperature', 'floor4_temperature', [
     max: 100
   }
 ], {
-  topic: 'bitraf/temperature/2/value'
+  topic: 'bitraf/temperature/2/value',
+  timeseries: 'Temperature2'
 });
 floor4.addMeasurement('humidity', 'floor4_humidity', [
   {
@@ -41,7 +44,8 @@ floor4.addMeasurement('humidity', 'floor4_humidity', [
     max: 100
   }
 ], {
-  topic: 'bitraf/humidity/2/value'
+  topic: 'bitraf/humidity/2/value',
+  timeseries: 'Humidity2'
 });
 var outside = new app.Dictionary('Outside', 'outside');
 outside.addMeasurement('temperature', 'outside_temperature', [
@@ -52,7 +56,8 @@ outside.addMeasurement('temperature', 'outside_temperature', [
     max: 100
   }
 ], {
-  topic: 'bitraf/temperature/3/value'
+  topic: 'bitraf/temperature/3/value',
+  timeseries: 'Temperature3'
 });
 
 // Start the server
@@ -65,7 +70,7 @@ var server = new app.Server({
   theme: 'Snow',
   history: {
     host: process.env.INFLUX_HOST || 'localhost',
-    db: process.env.INFLUX_DB || 'cbeam'
+    db: process.env.INFLUX_DB || 'openhab'
   }
 });
 server.start(function (err) {
