@@ -30,7 +30,7 @@
     "express": "^4.15.3",
     "influx": "^5.0.7",
     "mqtt": "^2.3.0",
-    "openmct": "nasa/openmct",
+    "openmct": "git://github.com/nasa/openmct.git#a3520ba51e25e5b151848842aeaab7cae64d2c1f",
     "ws": "^1.1.1"
   }
 }
