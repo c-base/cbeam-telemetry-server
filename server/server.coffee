@@ -49,7 +49,7 @@ class Server
           cbeam.announce @cbeam, @config.dictionaries, callback
           setInterval =>
             cbeam.announce @cbeam, @config.dictionaries, ->
-          , 60000
+          , 30000
 
   subscribe: ->
     # Subscribe to all messages
