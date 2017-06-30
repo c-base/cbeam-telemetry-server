@@ -5,20 +5,24 @@ class Dictionary
   addMeasurement: (name, key, values, options, callback) ->
     if typeof options is 'function'
       callback = options
-    unless callback
-      callback = (val) -> val
     unless options
       options = {}
     unless typeof options.persist is 'boolean'
       options.persist = true
     unless options.timeseries
       options.timeseries = key
+    unless options.topic
+      options.topic = key
 
     if values.length
       values[0].name = 'Value'
       values[0].key = 'value'
       values[0].hints =
         range: 1
+      if values[0].format and not callback
+        callback = @formatToCallback values[0].format
+    unless callback
+      callback = (val) -> val
 
     values.push
       key: 'utc'
@@ -34,6 +38,17 @@ class Dictionary
       values: values
       callback: callback
       options: options
+
+  formatToCallback: (format) ->
+    switch format
+      when 'integer'
+        return (val) -> parseInt val
+      when 'float'
+        return (val) -> parseFloat val
+      when 'boolean'
+        return (val) -> val is 'true'
+      else
+        return (val) -> val
 
   toJSON: ->
     def =

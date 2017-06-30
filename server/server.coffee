@@ -46,17 +46,13 @@ class Server
     # Subscribe to all messages
     @cbeam.subscribe '#'
     @cbeam.on 'message', (topic, msg) =>
-      messages = cbeam.filterMessages topic, msg, @config.dictionaries
-      return unless messages.length
-      for msg in messages
-        point =
-          id: msg.id
-          value: msg.value
-          timestamp: Date.now()
-        @history.record point, (err) ->
-          console.log err if err
-        @listeners.forEach (listener) ->
-          listener point
+      cbeam.filterMessages topic, msg, @config.dictionaries, (points) =>
+        return unless points.length
+        for point in points
+          @history.record point, (err) ->
+            console.log err if err
+          @listeners.forEach (listener) ->
+            listener point
     @wss.on 'connection', (socket) =>
       exports.handleConnection @, socket
 
