@@ -46,6 +46,8 @@ class History
     measurement = @getMeasurement point.id
     unless measurement
       return callback new Error "Measurement #{point.id} not defined"
+    return callback() unless measurement.options.persist
+
     @client.writePoints([
       measurement: @prepareId point.id
       timestamp: new Date point.timestamp

@@ -9,6 +9,8 @@ class Dictionary
       callback = (val) -> val
     unless options
       options = {}
+    unless typeof options.persist is 'boolean'
+      options.persist = true
     unless options.timeseries
       options.timeseries = key
 
