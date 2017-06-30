@@ -15,6 +15,8 @@ class Server
     @app.set 'view engine', 'ejs'
     @app.get '/', (req, res) =>
       res.render 'index', @config
+    @app.get '/index.html', (req, res) =>
+      res.render 'index', @config
     @app.get '/dictionary/:dict.json', (req, res) =>
       for dict in @config.dictionaries
         if dict.key is req.params.dict
