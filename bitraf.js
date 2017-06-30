@@ -1,8 +1,8 @@
 var app = require('./server/app');
 
 // Configure Bitraf
-var floor1 = new app.Dictionary('Floor 1', 'floor1');
-floor1.addMeasurement('temperature', 'floor1_temperature', [
+var floor2 = new app.Dictionary('2nd floor', 'floor2');
+floor2.addMeasurement('temperature', 'floor2_temperature', [
   {
     units: 'degrees',
     format: 'float',
@@ -12,7 +12,7 @@ floor1.addMeasurement('temperature', 'floor1_temperature', [
 ], {
   topic: 'bitraf/temperature/1'
 });
-floor1.addMeasurement('humidity', 'floor1_humidity', [
+floor2.addMeasurement('humidity', 'floor2_humidity', [
   {
     units: 'percentage',
     format: 'float',
@@ -22,8 +22,8 @@ floor1.addMeasurement('humidity', 'floor1_humidity', [
 ], {
   topic: 'bitraf/humidity/1'
 });
-var floor2 = new app.Dictionary('Floor 2', 'floor2');
-floor2.addMeasurement('temperature', 'floor2_temperature', [
+var floor4 = new app.Dictionary('4th floor', 'floor4');
+floor4.addMeasurement('temperature', 'floor4_temperature', [
   {
     units: 'degrees',
     format: 'float',
@@ -33,7 +33,7 @@ floor2.addMeasurement('temperature', 'floor2_temperature', [
 ], {
   topic: 'bitraf/temperature/2/value'
 });
-floor2.addMeasurement('humidity', 'floor2_humidity', [
+floor4.addMeasurement('humidity', 'floor4_humidity', [
   {
     units: 'percentage',
     format: 'float',
@@ -43,8 +43,8 @@ floor2.addMeasurement('humidity', 'floor2_humidity', [
 ], {
   topic: 'bitraf/humidity/2/value'
 });
-var floor3 = new app.Dictionary('Floor 3', 'floor3');
-floor3.addMeasurement('temperature', 'floor3_temperature', [
+var outside = new app.Dictionary('Outside', 'outside');
+outside.addMeasurement('temperature', 'outside_temperature', [
   {
     units: 'degrees',
     format: 'float',
@@ -61,7 +61,7 @@ var server = new app.Server({
   port: process.env.PORT || 8080,
   wss_port: process.env.WSS_PORT || 8082,
   broker: process.env.MSGFLO_BROKER || 'mqtt://localhost',
-  dictionaries: [floor1, floor2, floor3],
+  dictionaries: [floor2, floor4, outside],
   theme: 'Snow',
   history: {
     host: process.env.INFLUX_HOST || 'localhost',
