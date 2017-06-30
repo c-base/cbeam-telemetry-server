@@ -11,46 +11,25 @@ exports.connect = (config, callback) ->
     callback err
     callback = null
 
-exports.normalizeMessage = (topic, msg) ->
-  identifier = topic.replace /\//g, '.'
-  message = msg.toString()
-  msgs = []
-  msgs.push
-    id: identifier
-    value: message
-  return msgs
-
 unhandled = []
 
-exports.getSubscribedKeys = (dictionaries) ->
-  keys = []
+exports.filterMessages = (topic, msg, dictionaries, callback) ->
+  value = msg.toString()
+  handlers = []
   for dictionary in dictionaries
     for key, val of dictionary.measurements
-      keys.push key
-  keys
-exports.getKeyHandler = (dictionaries, key) ->
-  keys = []
-  for dictionary in dictionaries
-    for k, val of dictionary.measurements
-      continue unless k is key
-      return val.callback
-  null
-
-exports.filterMessages = (topic, msg, dictionaries) ->
-  msgs = exports.normalizeMessage topic, msg
-  return [] unless msgs.length
-  keys = exports.getSubscribedKeys dictionaries
-  handled = msgs.filter (msg) ->
-    return true if keys.indexOf(msg.id) isnt -1
-    return false if unhandled.indexOf(msg.id) isnt -1
-    unhandled.push msg.id
-    console.log "Unhandled key #{msg.id}: #{JSON.stringify(msg.value)}"
-    false
-  handled.map (msg) ->
-    handler = exports.getKeyHandler dictionaries, msg.id
-    return msg unless handler
-    msg.value = handler msg.value
-    msg
+      continue unless val.options.topic is topic
+      handlers.push val
+  unless handlers.length
+    return callback [] unless unhandled.indexOf(topic) is -1
+    unhandled.push topic
+    console.log "Unhandled key #{topic}: #{JSON.stringify(value)}"
+    return callback []
+  callback handlers.map (handler) ->
+    return message =
+      id: handler.key
+      value: handler.callback value
+      timestamp: Date.now()
 
 main = ->
   exports.connect (err, client) ->

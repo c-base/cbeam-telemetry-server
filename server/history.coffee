@@ -22,7 +22,7 @@ class History
     for dictionary in @config.dictionaries
       for k, val of dictionary.measurements
         table =
-          measurement: k
+          measurement: @prepareId k
           fields:
             value: @toInfluxType val.values[0].format
           tags: []
@@ -43,6 +43,11 @@ class History
   record: (point, callback) ->
     unless @client
       return callback new Error 'Not connected to InfluxDB'
+    measurement = @getMeasurement point.id
+    unless measurement
+      return callback new Error "Measurement #{point.id} not defined"
+    return callback() unless measurement.options.persist
+
     @client.writePoints([
       measurement: @prepareId point.id
       timestamp: new Date point.timestamp
@@ -54,12 +59,28 @@ class History
     .catch (e) ->
       callback e
 
-  prepareId: (id) ->
-    id.replace /\./g, '_'
+  getMeasurement: (key) ->
+    for dictionary in @config.dictionaries
+      continue unless dictionary.measurements[key]
+      return dictionary.measurements[key]
+    null
+
+  prepareId: (key) ->
+    measurement = @getMeasurement key
+    if measurement
+      id = measurement.options.timeseries
+    else
+      id = key
+    id = id.replace /\./g, '_'
+    id = id.replace /\//g, '_'
+    return id
 
   query: (id, start, end, callback) ->
     unless @client
       return callback new Error 'Not connected to InfluxDB'
+    measurement = @getMeasurement id
+    unless measurement
+      return callback new Error "Measurement #{id} not available"
     startString = new Date(start).toISOString()
     endString = new Date(end).toISOString()
     query = "
