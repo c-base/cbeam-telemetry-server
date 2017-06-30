@@ -21,7 +21,6 @@ c-beam topics are mapped to OpenMCT data in `app.js`.
 
 ## TODOs
 
-* Make actual MsgFlo participant
 * Mapping more c-beam data
 * Custom displays combining different data points (like a green/red bar status UI)
 * UIs for station functionality
