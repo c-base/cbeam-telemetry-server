@@ -46,7 +46,10 @@ class Server
           return callback err if err
           @cbeam = client
           do @subscribe
-          callback null
+          cbeam.announce @cbeam, @config.dictionaries, callback
+          setInterval =>
+            cbeam.announce @cbeam, @config.dictionaries, ->
+          , 30000
 
   subscribe: ->
     # Subscribe to all messages
