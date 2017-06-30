@@ -6,6 +6,7 @@ ws = require 'ws'
 class Server
   listeners: []
   constructor: (@config) ->
+    @config.theme = 'Espresso' unless @config.theme
     @history = new history @config
     @app = express()
 
