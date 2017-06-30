@@ -13,6 +13,29 @@ exports.connect = (config, callback) ->
 
 unhandled = []
 
+exports.announce = (client, dictionaries, callback) ->
+  for dictionary in dictionaries
+    continue unless dictionary.options.announce
+    def =
+      protocol: 'discovery'
+      command: 'participant'
+      payload:
+        id: "openmct-#{dictionary.key}"
+        component: "openmct/#{dictionary.key}"
+        icon: dictionary.options.icon
+        label: "OpenMCT logger for #{dictionary.name}"
+        role: dictionary.key
+        inports: []
+        outports: []
+    for key, val of dictionary.measurements
+      def.payload.inports.push
+        id: val.key
+        type: val.values[0].format
+        hidden: val.options.hidden
+        queue: val.options.topic
+    client.publish 'fbp', JSON.stringify def
+  do callback
+
 exports.filterMessages = (topic, msg, dictionaries, callback) ->
   value = msg.toString()
   handlers = []

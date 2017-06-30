@@ -1,6 +1,11 @@
 class Dictionary
-  constructor: (@name, @key) ->
+  constructor: (@name, @key, @options) ->
     @measurements = {}
+    @options = {} unless @options
+    unless typeof @options.announce is 'boolean'
+      @options.announce = true
+    unless @options.icon
+      @options.icon = 'tachometer'
 
   addMeasurement: (name, key, values, options, callback) ->
     if typeof options is 'function'
@@ -9,6 +14,8 @@ class Dictionary
       options = {}
     unless typeof options.persist is 'boolean'
       options.persist = true
+    unless typeof options.hidden is 'boolean'
+      options.hidden = false
     unless options.timeseries
       options.timeseries = key
     unless options.topic
