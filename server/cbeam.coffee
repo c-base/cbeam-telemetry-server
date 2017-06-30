@@ -29,7 +29,7 @@ exports.announce = (client, dictionaries, callback) ->
         outports: []
     for key, val of dictionary.measurements
       def.payload.inports.push
-        id: val.key
+        id: val.name
         type: val.values[0].format
         hidden: val.options.hidden
         queue: val.options.topic
