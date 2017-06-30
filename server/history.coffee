@@ -71,7 +71,9 @@ class History
       id = measurement.options.timeseries
     else
       id = key
-    id.replace /\./g, '_'
+    id = id.replace /\./g, '_'
+    id = id.replace /\//g, '_'
+    return id
 
   query: (id, start, end, callback) ->
     unless @client
