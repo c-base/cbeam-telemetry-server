@@ -11,7 +11,8 @@ floor2.addMeasurement('temperature', 'floor2_temperature', [
   }
 ], {
   topic: 'bitraf/temperature/1',
-  timeseries: 'Temperature1'
+  timeseries: 'Temperature1',
+  persist: false
 });
 floor2.addMeasurement('humidity', 'floor2_humidity', [
   {
@@ -22,7 +23,8 @@ floor2.addMeasurement('humidity', 'floor2_humidity', [
   }
 ], {
   topic: 'bitraf/humidity/1',
-  timeseries: 'Humidity1'
+  timeseries: 'Humidity1',
+  persist: false
 });
 var floor4 = new app.Dictionary('4th floor', 'floor4');
 floor4.addMeasurement('temperature', 'floor4_temperature', [
@@ -34,7 +36,8 @@ floor4.addMeasurement('temperature', 'floor4_temperature', [
   }
 ], {
   topic: 'bitraf/temperature/2/value',
-  timeseries: 'Temperature2'
+  timeseries: 'Temperature2',
+  persist: false
 });
 floor4.addMeasurement('humidity', 'floor4_humidity', [
   {
@@ -45,7 +48,8 @@ floor4.addMeasurement('humidity', 'floor4_humidity', [
   }
 ], {
   topic: 'bitraf/humidity/2/value',
-  timeseries: 'Humidity2'
+  timeseries: 'Humidity2',
+  persist: false
 });
 var outside = new app.Dictionary('Outside', 'outside');
 outside.addMeasurement('temperature', 'outside_temperature', [
@@ -57,7 +61,8 @@ outside.addMeasurement('temperature', 'outside_temperature', [
   }
 ], {
   topic: 'bitraf/temperature/3/value',
-  timeseries: 'Temperature3'
+  timeseries: 'Temperature3',
+  persist: false
 });
 
 // Start the server
