@@ -5,7 +5,9 @@ class Dictionary
     unless typeof @options.announce is 'boolean'
       @options.announce = true
     unless @options.icon
-      @options.icon = 'tachometer'
+      @options.icon = 'line-chart'
+    unless @options.description
+      @options.description = @name
 
   addMeasurement: (name, key, values, options, callback) ->
     if typeof options is 'function'

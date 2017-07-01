@@ -26,6 +26,8 @@
         <% var types = []; %>
         <% for (var i=0; i<dictionaries.length; i++) { %>
         openmct.install(DictionaryPlugin({
+          name: '<%= dictionaries[i].name %>',
+          description: '<%= dictionaries[i].options.description %>',
           key: '<%= dictionaries[i].key %>',
           type: '<%= dictionaries[i].key %>.telemetry',
           namespace: '<%= dictionaries[i].key %>.taxonomy'

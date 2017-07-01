@@ -67,8 +67,8 @@ var DictionaryPlugin = function (dictionary) {
         openmct.composition.addProvider(compositionProvider(dictionary));
 
         openmct.types.addType(dictionary.type, {
-            name: 'EVA1',
-            description: 'c-base EVA unit',
+            name: dictionary.name,
+            description: dictionary.description,
             cssClass: 'icon-telemetry'
         });
     };
