@@ -6,6 +6,8 @@ class Dictionary
       @options.announce = true
     unless @options.icon
       @options.icon = 'tachometer'
+    unless @options.description
+      @options.description = @name
 
   addMeasurement: (name, key, values, options, callback) ->
     if typeof options is 'function'
