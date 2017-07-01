@@ -35,6 +35,54 @@ floor2.addMeasurement('isopen', 'floor2_is_open', [
   timeseries: 'Floor2IsOpen',
   persist: true
 });
+floor2.addMeasurement('motion', 'floor2_motion', [
+  {
+    format: 'boolean'
+  }
+], {
+  topic: 'public/motionsensor/lab/motion',
+  timeseries: 'Floor2Motion',
+  persist: true
+});
+/*
+floor2.addMeasurement('current', 'floor2_current', [
+  {
+    format: 'boolean'
+  }
+], {
+  topic: 'public/currentsensor/current',
+  timeseries: 'Floor2Current',
+  persist: true
+});
+*/
+var floor3 = new app.Dictionary('3rd floor', 'floor3');
+floor3.addMeasurement('window1', 'floor3_window1', [
+  {
+    format: 'boolean'
+  }
+], {
+  topic: 'public/bitraf/windowsensor/workshop/sensor1',
+  timeseries: 'Floor3Window1',
+  persist: true
+});
+floor3.addMeasurement('window2', 'floor3_window2', [
+  {
+    format: 'boolean'
+  }
+], {
+  topic: 'public/bitraf/windowsensor/workshop/sensor2',
+  timeseries: 'Floor3Window2',
+  persist: true
+});
+floor3.addMeasurement('window3', 'floor3_window3', [
+  {
+    format: 'boolean'
+  }
+], {
+  topic: 'public/bitraf/windowsensor/workshop/sensor3',
+  timeseries: 'Floor3Window3',
+  persist: true
+});
 var floor4 = new app.Dictionary('4th floor', 'floor4');
 floor4.addMeasurement('temperature', 'floor4_temperature', [
   {
@@ -98,7 +146,7 @@ var server = new app.Server({
   port: process.env.PORT || 8080,
   wss_port: process.env.WSS_PORT || 8082,
   broker: process.env.MSGFLO_BROKER || 'mqtt://localhost',
-  dictionaries: [floor2, floor4, outside],
+  dictionaries: [floor2, floor3, floor4, outside],
   theme: 'Snow',
   history: {
     host: process.env.INFLUX_HOST || 'localhost',
