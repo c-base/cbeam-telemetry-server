@@ -1,6 +1,9 @@
 mqtt = require 'mqtt'
 
+booleanStates = {}
+
 exports.connect = (config, callback) ->
+  booleanStates = {}
   client = mqtt.connect config.broker
   client.on 'connect', ->
     return unless callback
@@ -48,11 +51,30 @@ exports.filterMessages = (topic, msg, dictionaries, callback) ->
     unhandled.push topic
     console.log "Unhandled key #{topic}: #{JSON.stringify(value)}"
     return callback []
-  callback handlers.map (handler) ->
+  points = handlers.map (handler) ->
     return message =
       id: handler.key
       value: handler.callback value
       timestamp: Date.now()
+  seenBooleans = points.filter((point) ->
+    # We're only interested in boolean values
+    return false unless typeof point.value is 'boolean'
+    # We're only interested in booleans we have a previous state for
+    if typeof booleanStates[point.id] is 'undefined'
+      booleanStates[point.id] = point.value
+      return false
+    # We're only interested in booleans that change state
+    return false if booleanStates[point.id] is point.value
+    true
+  ).map (point) ->
+    prevState = booleanStates[point.id]
+    booleanStates[point.id] = point.value
+    return prevPoint =
+      id: point.id
+      value: prevState
+      timestamp: point.timestamp - 1
+
+  callback seenBooleans.concat points
 
 main = ->
   exports.connect (err, client) ->
