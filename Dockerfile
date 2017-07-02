@@ -25,4 +25,7 @@ RUN node ./node_modules/gulp/bin/gulp.js install
 # Go back up
 WORKDIR /var/cbeam-telemetry-server
 
+# Map the volumes
+VOLUME /var/cbeam-telemetry-server/config
+
 CMD npm start

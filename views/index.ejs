@@ -16,9 +16,7 @@
         openmct.install(openmct.plugins.LocalStorage());
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
-        var ONE_HOUR = 60 * 60 * 1000;
-        var ONE_DAY = ONE_HOUR * 24;
-        openmct.time.clock('local', {start: -ONE_DAY, end: 0});
+        openmct.time.clock('local', {start: -<%= timeWindow %>, end: 0});
         openmct.time.timeSystem('utc');
         openmct.install(openmct.plugins.<%= theme %>());
 

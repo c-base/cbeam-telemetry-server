@@ -1,4 +1,4 @@
-var app = require('./server/app');
+var app = require('../server/app');
 
 // Configure EVA unit 1
 var eva = new app.Dictionary('EVA1', 'eva1');

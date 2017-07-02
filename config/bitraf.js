@@ -1,4 +1,4 @@
-var app = require('./server/app');
+var app = require('../server/app');
 
 // Configure Bitraf
 var floor2 = new app.Dictionary('2nd floor', 'floor2');
@@ -148,6 +148,7 @@ var server = new app.Server({
   broker: process.env.MSGFLO_BROKER || 'mqtt://localhost',
   dictionaries: [floor2, floor3, floor4, outside],
   theme: 'Snow',
+  timeWindow: 24 * 60 * 60 * 1000,
   history: {
     host: process.env.INFLUX_HOST || 'localhost',
     db: process.env.INFLUX_DB || 'openhab'
