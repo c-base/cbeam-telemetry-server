@@ -7,6 +7,7 @@ class Server
   listeners: []
   constructor: (@config) ->
     @config.theme = 'Espresso' unless @config.theme
+    @config.timeWindow = 24 * 60 * 60 * 1000 unless @config.timeWindow
     @history = new history @config
     @app = express()
 
