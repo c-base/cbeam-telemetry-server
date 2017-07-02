@@ -6,7 +6,7 @@
   "scripts": {
     "test": "grunt test",
     "postinstall": "cd node_modules/openmct && npm install",
-    "start": "node app.js"
+    "start": "node config/eva.js"
   },
   "repository": {
     "type": "git",

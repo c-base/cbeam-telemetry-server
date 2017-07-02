@@ -1,4 +1,4 @@
-var app = require('./server/app');
+var app = require('../server/app');
 
 // Configure Bitraf
 var floor2 = new app.Dictionary('2nd floor', 'floor2');
