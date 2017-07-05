@@ -158,6 +158,23 @@ station.addMeasurement('announcement', 'c_out.announcement', [
 ], {
   topic: 'c_out/announce_en'
 });
+var ingress = new app.Dictionary('Ingress', 'ingresstracker');
+ingress.addMeasurement('cbaseportal', 'ingress_cbase_portal', [
+  {
+    units: 'Level',
+    format: 'integer',
+    min: -8,
+    max: 8
+  }
+], {
+  topic: 'ingress/status/a6301120831b46f1be00fa2cb0bce195.16'
+}, function (state) {
+  var level = state.level;
+  if (state.team !== 'RESISTANCE') {
+    level = level * -1;
+  }
+  return level;
+});
 
 // Start the server
 var server = new app.Server({
@@ -165,7 +182,7 @@ var server = new app.Server({
   port: process.env.PORT || 8080,
   wss_port: process.env.WSS_PORT || 8082,
   broker: process.env.MSGFLO_BROKER || 'mqtt://c-beam.cbrp3.c-base.org',
-  dictionaries: [bar,station,crew],
+  dictionaries: [bar,station,crew,ingress],
   history: {
     host: process.env.INFLUX_HOST || 'localhost',
     db: process.env.INFLUX_DB || 'cbeam'
