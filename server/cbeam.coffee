@@ -40,7 +40,10 @@ exports.announce = (client, dictionaries, callback) ->
   do callback
 
 exports.filterMessages = (topic, msg, dictionaries, callback) ->
-  value = msg.toString()
+  try
+    value = JSON.parse msg.toString()
+  catch e
+    value = msg.toString()
   handlers = []
   for dictionary in dictionaries
     for key, val of dictionary.measurements
