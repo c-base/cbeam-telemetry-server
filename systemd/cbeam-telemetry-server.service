@@ -6,7 +6,7 @@ User=bergie
 Environment=PORT=80
 
 [Unit]
-After=network-online.target
+After=network-online.target influxd.service couchdb.service ntpd.service
 
 [Install]
 WantedBy=multi-user.target
