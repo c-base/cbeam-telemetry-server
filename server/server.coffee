@@ -61,6 +61,7 @@ class Server
         for point in points
           @history.record point, (err) ->
             console.log err if err
+            process.exit 1
           @listeners.forEach (listener) ->
             listener point
     @wss.on 'connection', (socket) =>
