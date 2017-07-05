@@ -1,0 +1,11 @@
+[Service]
+WorkingDirectory=/opt/cbeam-telemetry-server
+ExecStart=/usr/bin/node ./config/c-base.js
+Restart=always
+User=bergie
+
+[Unit]
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
