@@ -8,6 +8,8 @@ class Server
   constructor: (@config) ->
     @config.theme = 'Espresso' unless @config.theme
     @config.timeWindow = 24 * 60 * 60 * 1000 unless @config.timeWindow
+    unless @config.persistence
+      @config.persistence = 'openmct.plugins.LocalStorage()'
     @history = new history @config
     @app = express()
 

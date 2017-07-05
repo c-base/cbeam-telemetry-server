@@ -201,7 +201,8 @@ var server = new app.Server({
   history: {
     host: process.env.INFLUX_HOST || 'localhost',
     db: process.env.INFLUX_DB || 'cbeam'
-  }
+  },
+  persistence: 'openmct.plugins.CouchDB("http://openmct.cbrp3.c-base.org:5984/openmct")'
 });
 server.start(function (err) {
   if (err) {

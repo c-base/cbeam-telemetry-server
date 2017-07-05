@@ -13,7 +13,7 @@
         openmct.setAssetPath('node_modules/openmct/dist');
 
         // Bundled plugins
-        openmct.install(openmct.plugins.LocalStorage());
+        openmct.install(<%- persistence %>);
         openmct.install(openmct.plugins.MyItems());
         openmct.install(openmct.plugins.UTCTimeSystem());
         openmct.time.clock('local', {start: -<%= timeWindow %>, end: 0});
