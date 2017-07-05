@@ -3,6 +3,7 @@ WorkingDirectory=/opt/cbeam-telemetry-server
 ExecStart=/usr/bin/node ./config/c-base.js
 Restart=always
 User=bergie
+Environment=PORT=80
 
 [Unit]
 After=network-online.target
