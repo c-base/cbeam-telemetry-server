@@ -17,7 +17,7 @@ If you want to change the MQTT broker address, set the `MSGFLO_BROKER` environme
 
 ## Adding information sources
 
-c-beam topics are mapped to OpenMCT data in `app.js`.
+c-beam topics are mapped to OpenMCT data in the installation's runner file in `config/`.
 
 ## TODOs
 
