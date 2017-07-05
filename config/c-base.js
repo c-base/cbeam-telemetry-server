@@ -159,7 +159,7 @@ station.addMeasurement('announcement', 'c_out.announcement', [
   topic: 'c_out/announce_en'
 });
 var ingress = new app.Dictionary('Ingress', 'ingresstracker');
-ingress.addMeasurement('cbaseportal', 'ingress_cbase_portal', [
+ingress.addMeasurement('cbase', 'ingress.cbase.portal', [
   {
     units: 'Level',
     format: 'integer',
@@ -174,6 +174,21 @@ ingress.addMeasurement('cbaseportal', 'ingress_cbase_portal', [
     level = level * -1;
   }
   return level;
+});
+ingress.addMeasurement('winning', 'ingress.winning', [
+  {
+    units: 'Blue',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'ingress-data.FLOOR'
+}, function (state) {
+  if (state[2] > 0) {
+    return true;
+  }
+  return false;
 });
 
 // Start the server
