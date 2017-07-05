@@ -1,7 +1,7 @@
 var app = require('../server/app');
 
 // Configure EVA unit 1
-var crew = new app.Dictionary('Crew', 'crew');
+var crew = new app.Dictionary('Crew', 'crewtracker');
 crew.addMeasurement('members', 'crew.members', [
   {
     units: 'members',
@@ -34,7 +34,7 @@ crew.addMeasurement('online', 'crew.online', [
 }, function (online) {
   return online.length
 });
-var bar = new app.Dictionary('Bar', 'bar');
+var bar = new app.Dictionary('Bar', 'bartracker');
 bar.addMeasurement('open', 'bar.open', [
   {
     units: 'barbot',
@@ -71,7 +71,7 @@ replicatorValue(bar, 5, 'premiumcola');
 replicatorValue(bar, 6, 'spezi');
 replicatorValue(bar, 7, 'kraftmalz');
 
-var station = new app.Dictionary('Station', 'station');
+var station = new app.Dictionary('Station', 'stationtracker');
 station.addMeasurement('load', 'powermon.load', [
   {
     units: 'Watts',
