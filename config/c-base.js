@@ -43,9 +43,9 @@ bar.addMeasurement('open', 'bar.open', [
     max: 1
   }
 ], {
-  topic: 'bar/state'
+  topic: 'bar/stateful'
 }, function (state) {
-  return state == 'open';
+  return state == 'opening' || state == 'open' || state == 'closing';
 });
 var replicatorValue = function (dict, key, name) {
   dict.addMeasurement('replicator_' + name, 'bar.replicator.' + key, [
