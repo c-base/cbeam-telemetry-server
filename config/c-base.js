@@ -150,6 +150,16 @@ station.addMeasurement('ipb_tx', 'echelon.ipb.tx', [
 }, function (traffic) {
   return traffic.interfaces[1].tx;
 });
+station.addMeasurement('vacuum', 'device.vacuum', [
+  {
+    units: 'on',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'c-base/vacuum/on'
+});
 station.addMeasurement('workshop_motion', 'motion.workshop', [
   {
     units: 'motion',
