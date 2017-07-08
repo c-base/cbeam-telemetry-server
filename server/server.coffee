@@ -71,6 +71,8 @@ class Server
         return unless points.length
         for point in points
           @points.push point
+          @listeners.forEach (listener) ->
+            listener point
         unless @chunkSaver
           @chunkSaver = setTimeout =>
             savePoints @history, @points.slice(0), (err) ->
@@ -80,8 +82,6 @@ class Server
             @points = []
             @chunkSaver = null
           , 5000
-          @listeners.forEach (listener) ->
-            listener point
     @wss.on 'connection', (socket) =>
       exports.handleConnection @, socket
 
