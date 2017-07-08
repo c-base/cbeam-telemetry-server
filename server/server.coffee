@@ -3,8 +3,17 @@ history = require './history'
 express = require 'express'
 ws = require 'ws'
 
+savePoints = (history, points, callback) ->
+  return callback null unless points.lenght
+  point = points.shift()
+  history.record point, (err) ->
+    return callback err if err
+    savePoints history, points, callback
+
 class Server
   listeners: []
+  points: []
+  chunkSaver: null
   constructor: (@config) ->
     @config.theme = 'Espresso' unless @config.theme
     @config.timeWindow = 24 * 60 * 60 * 1000 unless @config.timeWindow
@@ -61,10 +70,16 @@ class Server
       cbeam.filterMessages topic, msg, @config.dictionaries, (points) =>
         return unless points.length
         for point in points
-          @history.record point, (err) ->
-            if err
-              console.log err
-              process.exit 1
+          @points.push point
+        unless @chunkSaver
+          @chunkSaver = setTimeout =>
+            savePoints @history, @points.slice(0), (err) ->
+              if err
+                console.log err
+                process.exit 1
+            @points = []
+            @chunkSaver = null
+          , 5000
           @listeners.forEach (listener) ->
             listener point
     @wss.on 'connection', (socket) =>
