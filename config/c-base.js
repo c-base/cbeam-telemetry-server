@@ -158,6 +158,27 @@ station.addMeasurement('announcement', 'c_out.announcement', [
 ], {
   topic: 'c_out/announce_en'
 });
+var arboretum = new app.Dictionary('Arboretum', 'arboretumtracker');
+arboretum.addMeasurement('leftdoor', 'arboretum.leftdoor', [
+  {
+    units: 'opened',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'arboretum/door/leftdooropen'
+});
+arboretum.addMeasurement('rightdoor', 'arboretum.rightdoor', [
+  {
+    units: 'opened',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'arboretum/door/rightdooropen'
+});
 var ingress = new app.Dictionary('Ingress', 'ingresstracker');
 ingress.addMeasurement('cbase', 'ingress.cbase.portal', [
   {
@@ -197,7 +218,13 @@ var server = new app.Server({
   port: process.env.PORT || 8080,
   wss_port: process.env.WSS_PORT || 8082,
   broker: process.env.MSGFLO_BROKER || 'mqtt://c-beam.cbrp3.c-base.org',
-  dictionaries: [bar,station,crew,ingress],
+  dictionaries: [
+    bar,
+    station,
+    arboretum,
+    crew,
+    ingress
+  ],
   history: {
     host: process.env.INFLUX_HOST || 'localhost',
     db: process.env.INFLUX_DB || 'cbeam'
