@@ -3,13 +3,6 @@ history = require './history'
 express = require 'express'
 ws = require 'ws'
 
-savePoints = (history, points, callback) ->
-  return callback null unless points.length
-  point = points.shift()
-  history.record point, (err) ->
-    return callback err if err
-    savePoints history, points, callback
-
 class Server
   listeners: []
   points: []
@@ -75,7 +68,7 @@ class Server
             listener point
         unless @chunkSaver
           @chunkSaver = setTimeout =>
-            savePoints @history, @points.slice(0), (err) ->
+            @history.recordBatch @points.slice(0), (err) ->
               if err
                 console.log err
                 process.exit 1

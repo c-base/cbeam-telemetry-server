@@ -59,6 +59,27 @@ class History
     .catch (e) ->
       callback e
 
+  recordBatch: (points, callback) ->
+    unless @client
+      return callback new Error 'Not connected to InfluxDB'
+    pts = points.map((point) =>
+      measurement = @getMeasurement point.id
+      return null unless measurement
+      return null unless measurement.options.persist
+      return pt =
+        measurement: @prepareId point.id
+        timestamp: new Date point.timestamp
+        fields:
+          value: point.value
+    ).filter (point) ->
+      return false unless point?.measurement
+      true
+    @client.writePoints(pts)
+    .then ->
+      do callback
+    .catch (e) ->
+      callback e
+
   getMeasurement: (key) ->
     for dictionary in @config.dictionaries
       continue unless dictionary.measurements[key]
