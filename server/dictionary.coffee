@@ -55,7 +55,7 @@ class Dictionary
       when 'float'
         return (val) -> parseFloat val
       when 'boolean'
-        return (val) -> val is 'true'
+        return (val) -> String(val) is 'true'
       else
         return (val) -> val
 
