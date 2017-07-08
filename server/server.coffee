@@ -4,7 +4,7 @@ express = require 'express'
 ws = require 'ws'
 
 savePoints = (history, points, callback) ->
-  return callback null unless points.lenght
+  return callback null unless points.length
   point = points.shift()
   history.record point, (err) ->
     return callback err if err
