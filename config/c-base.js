@@ -150,6 +150,16 @@ station.addMeasurement('ipb_tx', 'echelon.ipb.tx', [
 }, function (traffic) {
   return traffic.interfaces[1].tx;
 });
+station.addMeasurement('workshop_motion', 'motion.workshop', [
+  {
+    units: 'motion',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'sensor/workshop/motion'
+});
 station.addMeasurement('announcement', 'c_out.announcement', [
   {
     units: 'Message',
@@ -158,6 +168,38 @@ station.addMeasurement('announcement', 'c_out.announcement', [
 ], {
   topic: 'c_out/announce_en'
 });
+var microclimate = new app.Dictionary('Microclimate', 'climatetracker');
+microclimate.addMeasurement('workshop_temperature', 'clima.temperature.workshop', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/workshop/temperature'
+});
+microclimate.addMeasurement('workshop_humidity', 'clima.humidity.workshop', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/workshop/humidity'
+});
+microclimate.addMeasurement('workshop_sound', 'clima.sound.workshop', [
+  {
+    units: 'degrees',
+    format: 'int',
+    min: 0,
+    max: 255
+  }
+], {
+  topic: 'sensor/workshop/sound'
+});
+
 var arboretum = new app.Dictionary('Arboretum', 'arboretumtracker');
 arboretum.addMeasurement('leftdoor', 'arboretum.leftdoor', [
   {
@@ -221,6 +263,7 @@ var server = new app.Server({
   dictionaries: [
     bar,
     station,
+    microclimate,
     arboretum,
     crew,
     ingress
