@@ -170,6 +170,16 @@ station.addMeasurement('workshop_motion', 'motion.workshop', [
 ], {
   topic: 'sensor/workshop/motion'
 });
+station.addMeasurement('weltenbau_motion', 'motion.weltenbaulab', [
+  {
+    units: 'motion',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'sensor/weltenbaulab/motion'
+});
 station.addMeasurement('announcement', 'c_out.announcement', [
   {
     units: 'Message',
@@ -208,6 +218,26 @@ microclimate.addMeasurement('workshop_sound', 'clima.sound.workshop', [
   }
 ], {
   topic: 'sensor/workshop/sound'
+});
+microclimate.addMeasurement('weltenbau_temperature', 'clima.temperature.weltenbaulab', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/weltenbausensor/temperature'
+});
+microclimate.addMeasurement('weltenbau_humidity', 'clima.humidity.weltenbaulab', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/weltenbausensor/humidity'
 });
 
 var arboretum = new app.Dictionary('Arboretum', 'arboretumtracker');
