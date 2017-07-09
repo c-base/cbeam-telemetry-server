@@ -160,6 +160,16 @@ station.addMeasurement('vacuum', 'device.vacuum', [
 ], {
   topic: 'c-base/vacuum/on'
 });
+station.addMeasurement('mainhall_motion', 'motion.mainhall', [
+  {
+    units: 'motion',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'sensor/mainhallsensor/motion'
+});
 station.addMeasurement('workshop_motion', 'motion.workshop', [
   {
     units: 'motion',
@@ -189,6 +199,26 @@ station.addMeasurement('announcement', 'c_out.announcement', [
   topic: 'c_out/announce_en'
 });
 var microclimate = new app.Dictionary('Microclimate', 'climatetracker');
+microclimate.addMeasurement('mainhall_temperature', 'clima.temperature.mainhall', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/mainhallsensor/temperature'
+});
+microclimate.addMeasurement('mainhall_humidity', 'clima.humidity.mainhall', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/mainhallsensor/humidity'
+});
 microclimate.addMeasurement('workshop_temperature', 'clima.temperature.workshop', [
   {
     units: 'degrees',
