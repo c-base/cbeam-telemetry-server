@@ -178,7 +178,7 @@ station.addMeasurement('weltenbau_motion', 'motion.weltenbaulab', [
     max: 1
   }
 ], {
-  topic: 'sensor/weltenbaulab/motion'
+  topic: 'sensor/weltenbausensor/motion'
 });
 station.addMeasurement('announcement', 'c_out.announcement', [
   {
