@@ -25,6 +25,19 @@
         openmct.time.timeSystem('utc');
         openmct.install(openmct.plugins.<%= theme %>());
 
+        openmct.install(openmct.plugins.Conductor({
+          menuOptions: [
+            // Configuration for the LocalClock in the UTC time system
+            {
+              clock: 'local',
+              timeSystem: 'utc',
+              clockOffsets: {start: -<%= timeWindow %>, end: 0},
+              zoomOutLimit: 31 * 24 * 60 * 60 * 1000,
+              zoomInLimit: 60 * 1000
+            }
+          ]
+        }));
+
         // Local plugins
         <% var types = []; %>
         <% for (var i=0; i<dictionaries.length; i++) { %>
