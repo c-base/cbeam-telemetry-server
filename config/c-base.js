@@ -269,6 +269,16 @@ microclimate.addMeasurement('weltenbau_humidity', 'clima.humidity.weltenbaulab',
 ], {
   topic: 'sensor/weltenbausensor/humidity'
 });
+microclimate.addMeasurement('c_lab_light', 'clima.light.c_lab', [
+  {
+    units: 'lumens',
+    format: 'int',
+    min: 0,
+    max: 255
+  }
+], {
+  topic: 'sensor/c-lab/light'
+});
 
 var arboretum = new app.Dictionary('Arboretum', 'arboretumtracker');
 arboretum.addMeasurement('leftdoor', 'arboretum.leftdoor', [
