@@ -163,7 +163,7 @@ station.addMeasurement('vacuum', 'device.vacuum', [
 station.addMeasurement('mainhall_motion', 'motion.mainhall', [
   {
     units: 'motion',
-    format: 'boolean',
+    format: 'float',
     min: 0,
     max: 1
   }
@@ -183,7 +183,7 @@ station.addMeasurement('workshop_motion', 'motion.workshop', [
 station.addMeasurement('weltenbau_motion', 'motion.weltenbaulab', [
   {
     units: 'motion',
-    format: 'boolean',
+    format: 'float',
     min: 0,
     max: 1
   }
