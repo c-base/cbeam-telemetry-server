@@ -211,7 +211,7 @@ microclimate.addMeasurement('mainhall_temperature', 'clima.temperature.mainhall'
 });
 microclimate.addMeasurement('mainhall_humidity', 'clima.humidity.mainhall', [
   {
-    units: 'degrees',
+    units: 'percentage',
     format: 'float',
     min: 0,
     max: 100
@@ -231,7 +231,7 @@ microclimate.addMeasurement('workshop_temperature', 'clima.temperature.workshop'
 });
 microclimate.addMeasurement('workshop_humidity', 'clima.humidity.workshop', [
   {
-    units: 'degrees',
+    units: 'percentage',
     format: 'float',
     min: 0,
     max: 100
@@ -261,7 +261,7 @@ microclimate.addMeasurement('weltenbau_temperature', 'clima.temperature.weltenba
 });
 microclimate.addMeasurement('weltenbau_humidity', 'clima.humidity.weltenbaulab', [
   {
-    units: 'degrees',
+    units: 'percentage',
     format: 'float',
     min: 0,
     max: 100
@@ -313,7 +313,7 @@ arboretum.addMeasurement('txl_temperature', 'clima.temperature.txl', [
 });
 arboretum.addMeasurement('txl_humidity', 'clima.humidity.txl', [
   {
-    units: 'degrees',
+    units: 'percentage',
     format: 'float',
     min: 0,
     max: 100
