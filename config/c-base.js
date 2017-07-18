@@ -321,6 +321,16 @@ arboretum.addMeasurement('txl_humidity', 'clima.humidity.txl', [
 ], {
   topic: 'airportweather.HUMIDITY'
 });
+arboretum.addMeasurement('spree_temperature', 'clima.temperature.spree', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'c-base/spreesensor/temperature'
+});
 var ingress = new app.Dictionary('Ingress', 'ingresstracker');
 ingress.addMeasurement('cbase', 'ingress.cbase.portal', [
   {
