@@ -301,6 +301,26 @@ arboretum.addMeasurement('rightdoor', 'arboretum.rightdoor', [
 ], {
   topic: 'arboretum/door/rightdooropen'
 });
+arboretum.addMeasurement('txl_temperature', 'clima.temperature.txl', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'airportweather.TEMPERATURE'
+});
+arboretum.addMeasurement('txl_humidity', 'clima.humidity.txl', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'airportweather.HUMIDITY'
+});
 var ingress = new app.Dictionary('Ingress', 'ingresstracker');
 ingress.addMeasurement('cbase', 'ingress.cbase.portal', [
   {
