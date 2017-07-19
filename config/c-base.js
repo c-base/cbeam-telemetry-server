@@ -361,6 +361,16 @@ arboretum.addMeasurement('txl_humidity', 'clima.humidity.txl', [
 ], {
   topic: 'airportweather.HUMIDITY'
 });
+arboretum.addMeasurement('txl_pressure', 'clima.pressure.txl', [
+  {
+    units: 'hPa',
+    format: 'float',
+    min: 0,
+    max: 1050
+  }
+], {
+  topic: 'airportweather.PRESSURE'
+});
 arboretum.addMeasurement('spree_temperature', 'clima.temperature.spree', [
   {
     units: 'degrees',
