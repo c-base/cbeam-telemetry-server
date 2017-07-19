@@ -301,6 +301,16 @@ arboretum.addMeasurement('rightdoor', 'arboretum.rightdoor', [
 ], {
   topic: 'arboretum/door/rightdooropen'
 });
+arboretum.addMeasurement('arboretum_motion', 'motion.arboretum', [
+  {
+    units: 'motion',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'sensor/arboretum/motion'
+});
 arboretum.addMeasurement('arboretum_temperature', 'clima.temperature.arboretum', [
   {
     units: 'degrees',
