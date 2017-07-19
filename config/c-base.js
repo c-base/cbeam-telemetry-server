@@ -321,7 +321,7 @@ arboretum.addMeasurement('arboretum_humidity', 'clima.humidity.arboretum', [
 ], {
   topic: 'sensor/arboretum/humidity'
 });
-microclimate.addMeasurement('arboretum_sound', 'clima.sound.arboretum', [
+arboretum.addMeasurement('arboretum_sound', 'clima.sound.arboretum', [
   {
     units: 'degrees',
     format: 'int',
