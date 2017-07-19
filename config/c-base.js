@@ -301,6 +301,36 @@ arboretum.addMeasurement('rightdoor', 'arboretum.rightdoor', [
 ], {
   topic: 'arboretum/door/rightdooropen'
 });
+arboretum.addMeasurement('arboretum_temperature', 'clima.temperature.arboretum', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/arboretum/temperature'
+});
+arboretum.addMeasurement('arboretum_humidity', 'clima.humidity.arboretum', [
+  {
+    units: 'percentage',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/arboretum/humidity'
+});
+microclimate.addMeasurement('arboretum_sound', 'clima.sound.arboretum', [
+  {
+    units: 'degrees',
+    format: 'int',
+    min: 0,
+    max: 255
+  }
+], {
+  topic: 'sensor/arboretum/sound'
+});
 arboretum.addMeasurement('txl_temperature', 'clima.temperature.txl', [
   {
     units: 'degrees',
