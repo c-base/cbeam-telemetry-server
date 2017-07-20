@@ -173,7 +173,7 @@ station.addMeasurement('mainhall_motion', 'motion.mainhall', [
 station.addMeasurement('workshop_motion', 'motion.workshop', [
   {
     units: 'motion',
-    format: 'boolean',
+    format: 'float',
     min: 0,
     max: 1
   }
