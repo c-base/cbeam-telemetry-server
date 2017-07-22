@@ -269,6 +269,36 @@ microclimate.addMeasurement('weltenbau_humidity', 'clima.humidity.weltenbaulab',
 ], {
   topic: 'sensor/weltenbausensor/humidity'
 });
+microclimate.addMeasurement('soundlab_temperature', 'clima.temperature.soundlab', [
+  {
+    units: 'degrees',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/soundlab/temperature'
+});
+microclimate.addMeasurement('soundlab_humidity', 'clima.humidity.soundlab', [
+  {
+    units: 'percentage',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'sensor/soundlab/humidity'
+});
+microclimate.addMeasurement('soundlab_sound', 'clima.sound.soundlab', [
+  {
+    units: 'db',
+    format: 'float',
+    min: 0,
+    max: 255
+  }
+], {
+  topic: 'sensor/soundlab/sound'
+});
 microclimate.addMeasurement('c_lab_light', 'clima.light.c_lab', [
   {
     units: 'lumens',
