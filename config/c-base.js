@@ -304,7 +304,7 @@ arboretum.addMeasurement('rightdoor', 'arboretum.rightdoor', [
 arboretum.addMeasurement('arboretum_motion', 'motion.arboretum', [
   {
     units: 'motion',
-    format: 'boolean',
+    format: 'float',
     min: 0,
     max: 1
   }
@@ -333,8 +333,8 @@ arboretum.addMeasurement('arboretum_humidity', 'clima.humidity.arboretum', [
 });
 arboretum.addMeasurement('arboretum_sound', 'clima.sound.arboretum', [
   {
-    units: 'degrees',
-    format: 'int',
+    units: 'db',
+    format: 'float',
     min: 0,
     max: 255
   }
