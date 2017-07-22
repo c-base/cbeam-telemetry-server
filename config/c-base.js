@@ -340,6 +340,15 @@ arboretum.addMeasurement('arboretum_motion', 'motion.arboretum', [
   }
 ], {
   topic: 'sensor/arboretum/motion'
+}, function (motion) {
+  if (typeof motion === 'boolean') {
+    if (motion) {
+      return 1.0;
+    } else {
+      return 0.0;
+    }
+  }
+  return motion;
 });
 arboretum.addMeasurement('arboretum_temperature', 'clima.temperature.arboretum', [
   {
