@@ -160,6 +160,16 @@ station.addMeasurement('vacuum', 'device.vacuum', [
 ], {
   topic: 'c-base/vacuum/on'
 });
+station.addMeasurement('disco', 'disco.mainhall', [
+  {
+    units: 'on',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'DiscoAnimation.RUNNING'
+});
 station.addMeasurement('mainhall_motion', 'motion.mainhall', [
   {
     units: 'motion',
