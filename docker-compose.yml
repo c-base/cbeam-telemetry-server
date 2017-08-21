@@ -18,6 +18,7 @@ services:
     environment:
       MSGFLO_BROKER: 'mqtt://mqtt:1883'
       INFLUX_HOST: influxdb
+      OPENMCT_CONFIG: eva.js
     ports:
       - '127.0.0.1:8080:8080'
       - '127.0.0.1:8082:8082'
