@@ -28,4 +28,4 @@ WORKDIR /var/cbeam-telemetry-server
 # Map the volumes
 VOLUME /var/cbeam-telemetry-server/config
 
-CMD server.sh
+CMD ./server.sh
