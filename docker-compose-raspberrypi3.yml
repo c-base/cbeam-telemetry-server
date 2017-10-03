@@ -13,7 +13,9 @@ services:
       - '127.0.0.1:8086:8086'
   openmct:
     image: cbase/raspberrypi3-cbeam-telemetry-server
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-raspberrypi3
     container_name: cbeam-telemetry-server
     environment:
       MSGFLO_BROKER: 'mqtt://mqtt:1883'
