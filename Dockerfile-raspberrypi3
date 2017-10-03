@@ -14,12 +14,11 @@ WORKDIR /var/cbeam-telemetry-server
 COPY . /var/cbeam-telemetry-server
 
 # Install MsgFlo and dependencies
-RUN echo '{ "allow_root": true }' > /var/cbeam-telemetry-server/.bowerrc
+RUN echo '{ "allow_root": true }' > /root/.bowerrc
 RUN npm install
 
 # Build OpenMCT
 WORKDIR /var/cbeam-telemetry-server/node_modules/openmct
-RUN echo '{ "allow_root": true }' > /var/cbeam-telemetry-server/node_modules/openmct/.bowerrc
 RUN npm install
 RUN node ./node_modules/bower/bin/bower install --allow-root
 RUN node ./node_modules/gulp/bin/gulp.js install
