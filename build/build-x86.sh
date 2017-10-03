@@ -1,2 +1,3 @@
 #!/bin/sh
-docker-compose up -d
+# Build x86 image
+docker build -t $DOCKER_IMAGE -f Dockerfile .

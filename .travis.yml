@@ -13,6 +13,8 @@ script:
 - cp -R node_modules/openmct/dist openmct
 # Create platform-specific Docker image
 - ./build/build-${TARGET}.sh
+# Try starting the whole service
+- docker-compose up -d
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   docker push "$DOCKER_IMAGE"; fi
@@ -23,5 +25,5 @@ env:
 matrix:
   include:
   - env: TARGET=x86 DOCKER_IMAGE=cbase/c-beam-telemetry-server
-  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/raspberrypi3-c-beam-telemetry-server bower_allow_root=true
+  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/raspberrypi3-c-beam-telemetry-server bower_allow_root=true COMPOSE_FILE=docker-compose-raspberrypi3.yml
     sudo: true
