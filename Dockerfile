@@ -7,6 +7,8 @@ EXPOSE 8082
 
 # Reduce npm install verbosity, overflows Travis CI log view
 ENV NPM_CONFIG_LOGLEVEL warn
+# Install only production dependencies since we're copying OpenMCT from outside
+ENV NODE_ENV production
 
 RUN mkdir -p /var/cbeam-telemetry-server
 WORKDIR /var/cbeam-telemetry-server
@@ -14,7 +16,7 @@ WORKDIR /var/cbeam-telemetry-server
 COPY . /var/cbeam-telemetry-server
 
 # Install MsgFlo and dependencies
-RUN npm install --only=production
+RUN npm install
 
 # Set OpenMCT location
 ENV OPENMCT_ROOT openmct
