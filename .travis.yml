@@ -7,7 +7,7 @@ services:
 - docker
 install:
 # Allow Bowering also when sudo
-- echo '{ "allow_root": true }' > $HOME/.bowerrc
+- "echo '{ \"allow_root\": true }' > .bowerrc"
 # Install dependencies and build OpenMCT
 - npm install
 script:
