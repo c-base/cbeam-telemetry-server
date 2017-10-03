@@ -6,8 +6,6 @@ node_js:
 services:
 - docker
 install:
-# Allow Bowering also when sudo
-- "echo '{ \"allow_root\": true }' > .bowerrc"
 # Install dependencies and build OpenMCT
 - npm install
 script:
@@ -23,5 +21,5 @@ env:
 matrix:
   include:
   - env: TARGET=x86 DOCKER_IMAGE=cbase/c-beam-telemetry-server
-  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/c-beam-telemetry-server-raspberrypi3
+  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/c-beam-telemetry-server-raspberrypi3 bower_allow_root=true
     sudo: true
