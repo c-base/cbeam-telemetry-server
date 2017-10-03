@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
-    "postinstall": "cd node_modules/openmct && npm install",
     "start": "node config/eva.js"
   },
   "repository": {
