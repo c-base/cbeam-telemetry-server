@@ -14,6 +14,7 @@ WORKDIR /var/cbeam-telemetry-server
 COPY . /var/cbeam-telemetry-server
 
 # Install MsgFlo and dependencies
+RUN echo '{ "allow_root": true }' > /var/cbeam-telemetry-server/.bowerrc
 RUN npm install
 
 # Build OpenMCT
