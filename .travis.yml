@@ -23,5 +23,5 @@ env:
 matrix:
   include:
   - env: TARGET=x86 DOCKER_IMAGE=cbase/c-beam-telemetry-server
-  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/c-beam-telemetry-server-raspberrypi3 bower_allow_root=true
+  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/raspberrypi3-c-beam-telemetry-server bower_allow_root=true
     sudo: true
