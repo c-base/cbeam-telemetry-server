@@ -6,13 +6,24 @@ node_js:
 services:
 - docker
 install:
-- docker-compose -v
+# Install dependencies and build OpenMCT
+- npm install
 script:
+# Copy OpenMCT assets into correct location
+- cp -R node_modules/openmct/dist openmct
+# Prepare cross-compiling environment if targeting ARM
+- if [ "$TARGET" == "raspberrypi3" ]; then docker run --rm --privileged multiarch/qemu-user-static:register --reset; fi
+# Build Docker image and start the whole service
 - docker-compose up -d
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  docker push cbase/cbeam-telemetry-server; fi
+  docker push "$DOCKER_IMAGE"; fi
 env:
   global:
   - secure: ZbH41UJz5qvJqA8nr0ijY4YRT4n23s+j5YS0THUkMtH2AM8S+RIjqLm7ZTi1iGJCzPHh2Pl7NdC9qcZ/f2Cy64ZLRbWaZ46TAkzbevqrOKvDoGNa5cPvx2NYtDGbyxSSrRjo1+nTx4TVkPPYyq6AYZ4Z9GIvIUDoZIo/v4ie5I9hQhjTR6r777AHqLcjWWpAYPkPhqRPHoEldaQu2XV+A4J4/eIBAbUipkDBtBpXg+Xv05mlQz+srWv5BQizYhxlyZaaeFb5BMp2dCofXBvM0daWdS0Iaeceuid/FRe8vyp0AOUEWh/knr0svNY1SI1yauXxfeEbqz0sTrrR/PzGy0l1a5+q69l47vvsXE49n09/Rr0msakUFixnd0XLYEEDzEdrpgWk0BBL0KBrVouCv6l1+5Sxka9juEh81en059dJWaIYUqeiMGbkyYnYdYIT2L0sUMDVFw7vRaP2Z3e+g5fMrS2LhVi5ua6oMQo5qxqqbc9KbG1qfOel0oKYG6vszlTfDHPC46aO95BZdTpxkgz8l7noz74wa30rcSTRiwmEiCN5Cp5MwyJHKkJuWaEj9/eHcTI8HTWoIeiwuTty6E0V5cu0V+cHaCRPS2nZQgefBzVdGIfyyZrVLw2TEvoUmYxh5JZWAyUZus+ZpqoV5eBIWquBe95zajGHd/0C5Nc=
   - secure: 3FSWAq3lxmiVWxfBaJ+fzoaYCiJwDViWTTLjP8f3P0qAp27aY4CvG/i0UJ9IHYlnwqfYi/JNkP914RTPVspVUDcVnep0Lpkg0xuuAxqFRGnYy/evC/UprRNVVd1asduGeFSEKfFiT1ka2NsPLEKtsrrKDHQeoCxinsPTbRauVYq37TCSSft0NObmkvSLwZ7nq5+l8x7guL+3xRNA62zSRbXfbhiXsR8QPPZd+885qPSOYcAwvIujXVn5IVyd8Ni4DFUEpizPYgx5+PEekuTbErjHin6qV7VWQT1nvrLqy6B6SEjFI9Hp9QHdD48/1Sp3Obv6WOMVbwA/S5QKNdMUMNwwZ7De+pfqDlH6PQWOnA6N/CEySOYkV20zpwL9EY0hix9R44M6bWYijgJZC9qD6xnDhBwRrNiPacqPPSneTimsQTtMIFOVleWZ+Dm6gw8rCVRitzN+C0iT/JCLQ17oeSSaOtQPOkW6z5uYAVdAv3k0IOesWk/EmEvYStbErDKboLe8MCFtidup9NgCQQ5AWkzSsvVGjWQYCL26jdMMBSOP+aJ0lKoUR3u9JUmaVkkJewb0CJg0xfECnG1OcP2R75xYXi1uK59hCK4fajFQ0W8kWt+eLBN5gNu6yeGViLv9/JJMUimXLiVvUt9sgDxSqX3z3vVERDr3pm+lGvUU1dM=
+matrix:
+  include:
+  - env: TARGET=x86 DOCKER_IMAGE=cbase/c-beam-telemetry-server
+  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/raspberrypi3-c-beam-telemetry-server bower_allow_root=true COMPOSE_FILE=docker-compose-raspberrypi3.yml
+    sudo: true

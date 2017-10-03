@@ -12,11 +12,13 @@ class Server
     @config.timeWindow = 24 * 60 * 60 * 1000 unless @config.timeWindow
     unless @config.persistence
       @config.persistence = 'openmct.plugins.LocalStorage()'
+    unless @config.openmctRoot
+      @config.openmctRoot = process.env.OPENMCT_ROOT or 'node_modules/openmct/dist'
     @history = new history @config
     @app = express()
 
     @app.use express.static 'assets'
-    @app.use '/node_modules/openmct', express.static 'node_modules/openmct'
+    @app.use "/#{@config.openmctRoot}", express.static @config.openmctRoot
     @app.set 'view engine', 'ejs'
     @app.get '/', (req, res) =>
       res.render 'index', @config

@@ -1,4 +1,4 @@
-c-beam telemetry server [![Docker Hub](https://img.shields.io/docker/pulls/cbase/cbeam-telemetry-server.svg)](https://hub.docker.com/r/cbase/cbeam-telemetry-server/) [![Build Status](https://travis-ci.org/c-base/cbeam-telemetry-server.svg?branch=master)](https://travis-ci.org/c-base/cbeam-telemetry-server)
+c-beam telemetry server [![Docker Hub x86](https://img.shields.io/docker/pulls/cbase/cbeam-telemetry-server.svg)](https://hub.docker.com/r/cbase/cbeam-telemetry-server/) [![Docker Hub Raspberry Pi3](https://img.shields.io/docker/pulls/cbase/raspberrypi3-cbeam-telemetry-server.svg)](https://hub.docker.com/r/cbase/raspberrypi3-cbeam-telemetry-server/) [![Build Status](https://travis-ci.org/c-base/cbeam-telemetry-server.svg?branch=master)](https://travis-ci.org/c-base/cbeam-telemetry-server)
 =======================
 
 This is a telemetry server for connecting the NASA [OpenMCT](https://nasa.github.io/openmct/) with information sources on [c-base's](https://c-base.org/) c-beam telemetry network. It is based on the OpenMCT [telemetry adapter tutorial](http://nasa.github.io/openmct/docs/tutorials/#telemetry-adapter).

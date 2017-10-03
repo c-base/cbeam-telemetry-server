@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>c-beam telemetry server</title>
-    <script src="node_modules/openmct/dist/openmct.js"></script>
+    <script src="<%- openmctRoot %>/openmct.js"></script>
     <script src="lib/http.js"></script>
     <script src="dictionary-plugin.js"></script>
     <script src="historical-telemetry-plugin.js"></script>
@@ -15,7 +15,7 @@
 </head>
 <body>
     <script>
-        openmct.setAssetPath('node_modules/openmct/dist');
+        openmct.setAssetPath('<%- openmctRoot %>');
 
         // Bundled plugins
         openmct.install(<%- persistence %>);
