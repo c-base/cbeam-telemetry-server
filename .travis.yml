@@ -6,9 +6,13 @@ node_js:
 services:
 - docker
 install:
-- docker-compose -v
+# Allow Bowering also when sudo
+- echo '{ "allow_root": true }' > $HOME/.bowerrc
+# Install dependencies and build OpenMCT
+- npm install
 script:
-- travis_wait 20 ./build/build-${TARGET}.sh
+# Create platform-specific Docker image
+- ./build/build-${TARGET}.sh
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   docker push "$DOCKER_IMAGE"; fi
