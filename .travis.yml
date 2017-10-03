@@ -1,6 +1,6 @@
 language: node_js
 dist: trusty
-sudo: false
+sudo: required
 node_js:
 - '6'
 services:
@@ -8,7 +8,12 @@ services:
 install:
 - docker-compose -v
 script:
+# Build and start x86 image
 - docker-compose up -d
+# prepare qemu for cross-compiling
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+# Build RPi3 image
+- docker build -t cbase/cbeam-telemetry-server-raspberrypi3 -f Dockerfile-raspberrypi3 .
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   docker push cbase/cbeam-telemetry-server; fi
