@@ -11,9 +11,9 @@ install:
 script:
 # Copy OpenMCT assets into correct location
 - cp -R node_modules/openmct/dist openmct
-# Create platform-specific Docker image
-- ./build/build-${TARGET}.sh
-# Try starting the whole service
+# Prepare cross-compiling environment if targeting ARM
+- if [ "$TARGET" == "raspberrypi3" ]; then docker run --rm --privileged multiarch/qemu-user-static:register --reset; fi
+# Build Docker image and start the whole service
 - docker-compose up -d
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
