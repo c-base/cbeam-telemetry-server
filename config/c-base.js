@@ -259,6 +259,16 @@ microclimate.addMeasurement('workshop_sound', 'clima.sound.workshop', [
 ], {
   topic: 'sensor/workshop/sound'
 });
+station.addMeasurement('workshop_cnancy_running', 'cnc.workshop.running', [
+  {
+    units: 'running',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'werkstatt/c_nancy/running'
+});
 microclimate.addMeasurement('weltenbau_temperature', 'clima.temperature.weltenbaulab', [
   {
     units: 'degrees',
