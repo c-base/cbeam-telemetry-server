@@ -33,6 +33,6 @@
     "ws": "^3.3.2"
   },
   "devDependencies": {
-    "openmct": "git://github.com/nasa/openmct.git#a3520ba51e25e5b151848842aeaab7cae64d2c1f"
+    "openmct": "git://github.com/nasa/openmct.git#5a49ac16b1346cbf17e88b462e538caf4f4f1947"
   }
 }
