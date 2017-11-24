@@ -25,14 +25,14 @@
   "homepage": "https://github.com/c-base/cbeam-telemetry-server#readme",
   "dependencies": {
     "coffee-script": "^1.12.1",
-    "debug": "^2.6.0",
+    "debug": "^3.1.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "influx": "^5.0.7",
     "mqtt": "^2.3.0",
-    "ws": "^1.1.1"
+    "ws": "^3.3.2"
   },
   "devDependencies": {
-    "openmct": "git://github.com/nasa/openmct.git#a3520ba51e25e5b151848842aeaab7cae64d2c1f"
+    "openmct": "git://github.com/nasa/openmct.git#5a49ac16b1346cbf17e88b462e538caf4f4f1947"
   }
 }
