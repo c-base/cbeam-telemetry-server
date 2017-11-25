@@ -78,7 +78,7 @@ class Server
                 @points = savePoints.concat @points
             @points = []
             @chunkSaver = null
-          , 5000
+          , 10000
     @wss.on 'connection', (socket) =>
       exports.handleConnection @, socket
 
