@@ -70,10 +70,12 @@ class Server
             listener point
         unless @chunkSaver
           @chunkSaver = setTimeout =>
-            @history.recordBatch @points.slice(0), (err) ->
+            savePoints = @points.slice 0
+            @history.recordBatch savePoints, (err) ->
               if err
                 console.log err
-                process.exit 1
+                # Save failed, put the failed data points back to the list
+                @points = savePoints.concat @points
             @points = []
             @chunkSaver = null
           , 5000
