@@ -259,6 +259,16 @@ microclimate.addMeasurement('workshop_sound', 'clima.sound.workshop', [
 ], {
   topic: 'sensor/workshop/sound'
 });
+station.addMeasurement('workshop_onair', 'onair.workshop', [
+  {
+    units: 'onair',
+    format: 'boolean',
+    min: 0,
+    max: 1
+  }
+], {
+  topic: 'c-base/werkstattonair/onair'
+});
 station.addMeasurement('workshop_cnancy_running', 'cnc.workshop.running', [
   {
     units: 'running',
