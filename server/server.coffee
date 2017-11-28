@@ -1,6 +1,7 @@
 cbeam = require './cbeam'
 history = require './history'
 express = require 'express'
+cors = require 'cors'
 ws = require 'ws'
 
 class Server
@@ -30,7 +31,7 @@ class Server
           res.json dict.toJSON()
           return
       res.status(404).end()
-    @app.get '/telemetry/:pointId', (req, res) =>
+    @app.get '/telemetry/:pointId', cors(), (req, res) =>
       start = parseInt req.query.start
       end = parseInt req.query.end
       ids = req.params.pointId.split ','

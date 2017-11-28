@@ -25,6 +25,7 @@
   "homepage": "https://github.com/c-base/cbeam-telemetry-server#readme",
   "dependencies": {
     "coffee-script": "^1.12.1",
+    "cors": "^2.8.4",
     "debug": "^3.1.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
