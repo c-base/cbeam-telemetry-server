@@ -43,7 +43,7 @@ bar.addMeasurement('open', 'bar.open', [
     max: 1
   }
 ], {
-  topic: 'bar/stateful'
+  topic: 'bar/state'
 }, function (state) {
   return state == 'opening' || state == 'open' || state == 'closing';
 });
