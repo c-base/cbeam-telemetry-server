@@ -208,6 +208,14 @@ station.addMeasurement('announcement', 'c_out.announcement', [
 ], {
   topic: 'c_out/announce_en'
 });
+station.addMeasurement('fbp', 'c-flo.heartbeat', [
+  {
+    units: 'Message',
+    format: 'string'
+  }
+], {
+  topic: 'fbp'
+});
 var microclimate = new app.Dictionary('Microclimate', 'climatetracker');
 microclimate.addMeasurement('mainhall_temperature', 'clima.temperature.mainhall', [
   {
