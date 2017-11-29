@@ -215,6 +215,11 @@ station.addMeasurement('fbp', 'c-flo.heartbeat', [
   }
 ], {
   topic: 'fbp'
+}, function (discovery) {
+  if (discovery.payload) {
+    return discovery.payload.role;
+  }
+  return 'unknown';
 });
 var microclimate = new app.Dictionary('Microclimate', 'climatetracker');
 microclimate.addMeasurement('mainhall_temperature', 'clima.temperature.mainhall', [
