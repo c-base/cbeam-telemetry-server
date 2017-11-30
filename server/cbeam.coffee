@@ -2,6 +2,11 @@ mqtt = require 'mqtt'
 
 booleanStates = {}
 
+exports.latestState = (id) ->
+  if typeof booleanStates[id] is 'undefined'
+    return null
+  booleanStates[id]
+
 exports.connect = (config, callback) ->
   booleanStates = {}
   client = mqtt.connect config.broker

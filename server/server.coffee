@@ -31,6 +31,11 @@ class Server
           res.json dict.toJSON()
           return
       res.status(404).end()
+    @app.get '/telemetry/latest/:pointId', cors(), (req, res) =>
+      unless @history.getMeasurement req.params.pointId
+        res.status(404).end()
+        return
+      res.json cbeam.latestState req.params.pointId
     @app.get '/telemetry/:pointId', cors(), (req, res) =>
       start = parseInt req.query.start
       end = parseInt req.query.end
