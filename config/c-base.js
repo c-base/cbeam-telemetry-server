@@ -290,7 +290,7 @@ station.addMeasurement('workshop_cnancy_running', 'cnc.workshop.running', [
     max: 1
   }
 ], {
-  topic: 'werkstatt/c_nancy/running'
+  topic: 'werkstatt/c_nancy/milling'
 });
 microclimate.addMeasurement('weltenbau_temperature', 'clima.temperature.weltenbaulab', [
   {
