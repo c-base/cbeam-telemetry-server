@@ -30,7 +30,7 @@ crew.addMeasurement('online', 'crew.online', [
     max: 100
   }
 ], {
-  topic: 'CrewOnline.OUT'
+  topic: 'CrewOnline/out'
 }, function (online) {
   return online.length
 });
@@ -56,7 +56,7 @@ var replicatorValue = function (dict, key, name) {
       max: 1
     }
   ], {
-    topic: 'Replicator.OUT'
+    topic: 'Replicator/out'
   }, function (state) {
     var keys = Object.keys(state).sort();
     var stateKey = keys[key - 1];
@@ -168,7 +168,7 @@ station.addMeasurement('disco', 'disco.mainhall', [
     max: 1
   }
 ], {
-  topic: 'DiscoAnimation.RUNNING'
+  topic: 'DiscoAnimation/running'
 });
 station.addMeasurement('mainhall_motion', 'motion.mainhall', [
   {
