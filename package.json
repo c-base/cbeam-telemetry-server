@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
-    "postinstall": "if [ -z \"$npm_config_production\" ]; then cd node_modules/openmct && npm install; fi",
+    "postinstall": "if [ -z \"$npm_config_production\" ]; then cd node_modules/openmct && npm install && npm run prepare; fi",
     "start": "node config/eva.js"
   },
   "repository": {
