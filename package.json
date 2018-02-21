@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
-    "postinstall": "if [ -z \"$npm_config_production\" ]; then cd node_modules/openmct && npm install; fi",
+    "postinstall": "if [ -z \"$npm_config_production\" ]; then cd node_modules/openmct && npm install && npm run prepare; fi",
     "start": "node config/eva.js"
   },
   "repository": {
@@ -34,6 +34,6 @@
     "ws": "^3.3.2"
   },
   "devDependencies": {
-    "openmct": "git://github.com/nasa/openmct.git#5a49ac16b1346cbf17e88b462e538caf4f4f1947"
+    "openmct": "git://github.com/nasa/openmct.git#dc91a94f0e970cab0d4fd93fba49d95ca8d90ea9"
   }
 }
