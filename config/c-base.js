@@ -443,7 +443,7 @@ arboretum.addMeasurement('arboretum_sound', 'clima.sound.arboretum', [
 ], {
   topic: 'staub/arboretum/sound'
 });
-microclimate.addMeasurement('arboretum_pm10', 'clima.pm10.arboretum', [
+arboretum.addMeasurement('arboretum_pm10', 'clima.pm10.arboretum', [
   {
     units: 'ppm',
     format: 'float',
@@ -453,7 +453,7 @@ microclimate.addMeasurement('arboretum_pm10', 'clima.pm10.arboretum', [
 ], {
   topic: 'staub/arboretum/pm10'
 });
-microclimate.addMeasurement('arboretum_pm25', 'clima.pm25.arboretum', [
+arboretum.addMeasurement('arboretum_pm25', 'clima.pm25.arboretum', [
   {
     units: 'ppm',
     format: 'float',
