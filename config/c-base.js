@@ -244,7 +244,7 @@ microclimate.addMeasurement('mainhall_humidity', 'clima.humidity.mainhall', [
 });
 microclimate.addMeasurement('mainhall_pm10', 'clima.pm10.mainhall', [
   {
-    units: 'particles',
+    units: 'ppm',
     format: 'float',
     min: 0,
     max: 2000
@@ -254,7 +254,7 @@ microclimate.addMeasurement('mainhall_pm10', 'clima.pm10.mainhall', [
 });
 microclimate.addMeasurement('mainhall_pm25', 'clima.pm25.mainhall', [
   {
-    units: 'particles',
+    units: 'ppm',
     format: 'float',
     min: 0,
     max: 2000
@@ -445,7 +445,7 @@ arboretum.addMeasurement('arboretum_sound', 'clima.sound.arboretum', [
 });
 microclimate.addMeasurement('arboretum_pm10', 'clima.pm10.arboretum', [
   {
-    units: 'particles',
+    units: 'ppm',
     format: 'float',
     min: 0,
     max: 2000
@@ -455,7 +455,7 @@ microclimate.addMeasurement('arboretum_pm10', 'clima.pm10.arboretum', [
 });
 microclimate.addMeasurement('arboretum_pm25', 'clima.pm25.arboretum', [
   {
-    units: 'particles',
+    units: 'ppm',
     format: 'float',
     min: 0,
     max: 2000
