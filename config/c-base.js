@@ -247,7 +247,7 @@ microclimate.addMeasurement('mainhall_pm10', 'clima.pm10.mainhall', [
     units: 'particles',
     format: 'float',
     min: 0,
-    max: 100
+    max: 2000
   }
 ], {
   topic: 'staub/mainhall/pm10'
@@ -257,7 +257,7 @@ microclimate.addMeasurement('mainhall_pm25', 'clima.pm25.mainhall', [
     units: 'particles',
     format: 'float',
     min: 0,
-    max: 100
+    max: 2000
   }
 ], {
   topic: 'staub/mainhall/pm25'
@@ -448,7 +448,7 @@ microclimate.addMeasurement('arboretum_pm10', 'clima.pm10.arboretum', [
     units: 'particles',
     format: 'float',
     min: 0,
-    max: 100
+    max: 2000
   }
 ], {
   topic: 'staub/arboretum/pm10'
@@ -468,7 +468,7 @@ arboretum.addMeasurement('txl_temperature', 'clima.temperature.txl', [
     units: 'degrees',
     format: 'float',
     min: 0,
-    max: 100
+    max: 2000
   }
 ], {
   topic: 'airportweather.TEMPERATURE'
