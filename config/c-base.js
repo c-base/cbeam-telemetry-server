@@ -458,7 +458,7 @@ microclimate.addMeasurement('arboretum_pm25', 'clima.pm25.arboretum', [
     units: 'particles',
     format: 'float',
     min: 0,
-    max: 100
+    max: 2000
   }
 ], {
   topic: 'staub/arboretum/pm25'
@@ -468,7 +468,7 @@ arboretum.addMeasurement('txl_temperature', 'clima.temperature.txl', [
     units: 'degrees',
     format: 'float',
     min: 0,
-    max: 2000
+    max: 100
   }
 ], {
   topic: 'airportweather.TEMPERATURE'
