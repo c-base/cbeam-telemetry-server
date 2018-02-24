@@ -242,6 +242,26 @@ microclimate.addMeasurement('mainhall_humidity', 'clima.humidity.mainhall', [
 ], {
   topic: 'sensor/mainhallsensor/humidity'
 });
+microclimate.addMeasurement('mainhall_pm10', 'clima.pm10.mainhall', [
+  {
+    units: 'particles',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'staub/mainhall/pm10'
+});
+microclimate.addMeasurement('mainhall_pm25', 'clima.pm25.mainhall', [
+  {
+    units: 'particles',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'staub/mainhall/pm25'
+});
 microclimate.addMeasurement('workshop_temperature', 'clima.temperature.workshop', [
   {
     units: 'degrees',
@@ -401,7 +421,7 @@ arboretum.addMeasurement('arboretum_temperature', 'clima.temperature.arboretum',
     max: 100
   }
 ], {
-  topic: 'sensor/arboretum/temperature'
+  topic: 'staub/arboretum/temperature'
 });
 arboretum.addMeasurement('arboretum_humidity', 'clima.humidity.arboretum', [
   {
@@ -411,7 +431,7 @@ arboretum.addMeasurement('arboretum_humidity', 'clima.humidity.arboretum', [
     max: 100
   }
 ], {
-  topic: 'sensor/arboretum/humidity'
+  topic: 'staub/arboretum/humidity'
 });
 arboretum.addMeasurement('arboretum_sound', 'clima.sound.arboretum', [
   {
@@ -421,7 +441,27 @@ arboretum.addMeasurement('arboretum_sound', 'clima.sound.arboretum', [
     max: 255
   }
 ], {
-  topic: 'sensor/arboretum/sound'
+  topic: 'staub/arboretum/sound'
+});
+microclimate.addMeasurement('arboretum_pm10', 'clima.pm10.arboretum', [
+  {
+    units: 'particles',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'staub/arboretum/pm10'
+});
+microclimate.addMeasurement('arboretum_pm25', 'clima.pm25.arboretum', [
+  {
+    units: 'particles',
+    format: 'float',
+    min: 0,
+    max: 100
+  }
+], {
+  topic: 'staub/arboretum/pm25'
 });
 arboretum.addMeasurement('txl_temperature', 'clima.temperature.txl', [
   {
