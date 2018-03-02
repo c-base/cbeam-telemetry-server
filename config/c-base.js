@@ -463,6 +463,56 @@ arboretum.addMeasurement('arboretum_pm25', 'clima.pm25.arboretum', [
 ], {
   topic: 'staub/arboretum/pm25'
 });
+arboretum.addMeasurement('duckbox_pm10', 'clima.pm10.duckbox', [
+  {
+    units: 'ppm',
+    format: 'float',
+    min: 0,
+    max: 2000
+  }
+], {
+  topic: 'LuftJetzt/pm10'
+});
+arboretum.addMeasurement('duckbox_o3', 'clima.o3.duckbox', [
+  {
+    units: 'ppm',
+    format: 'float',
+    min: 0,
+    max: 2000
+  }
+], {
+  topic: 'LuftJetzt/o3'
+});
+arboretum.addMeasurement('duckbox_no2', 'clima.no2.duckbox', [
+  {
+    units: 'ppm',
+    format: 'float',
+    min: 0,
+    max: 2000
+  }
+], {
+  topic: 'LuftJetzt/no2'
+});
+arboretum.addMeasurement('duckbox_so2', 'clima.so2.duckbox', [
+  {
+    units: 'ppm',
+    format: 'float',
+    min: 0,
+    max: 2000
+  }
+], {
+  topic: 'LuftJetzt/so2'
+});
+arboretum.addMeasurement('duckbox_co', 'clima.co.duckbox', [
+  {
+    units: 'ppm',
+    format: 'float',
+    min: 0,
+    max: 20000
+  }
+], {
+  topic: 'LuftJetzt/co'
+});
 arboretum.addMeasurement('txl_temperature', 'clima.temperature.txl', [
   {
     units: 'degrees',
