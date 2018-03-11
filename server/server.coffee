@@ -38,7 +38,11 @@ class Server
       if req.query.timestamp
         res.json cbeam.latestState req.params.pointId
         return
-      res.json cbeam.latestState(req.params.pointId).value
+      state = cbeam.latestState(req.params.pointId).value
+      if typeof state?.value isnt 'undefined'
+        res.json state.value
+        return
+      res.json null
     @app.get '/telemetry/:pointId', cors(), (req, res) =>
       start = parseInt req.query.start
       end = parseInt req.query.end
