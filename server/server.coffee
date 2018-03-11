@@ -35,6 +35,9 @@ class Server
       unless @history.getMeasurement req.params.pointId
         res.status(404).end()
         return
+      if req.query.timestamp
+        res.json cbeam.latestState req.params.pointId
+        return
       res.json cbeam.latestState(req.params.pointId).value
     @app.get '/telemetry/:pointId', cors(), (req, res) =>
       start = parseInt req.query.start
