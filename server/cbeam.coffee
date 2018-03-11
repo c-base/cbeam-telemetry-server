@@ -69,14 +69,18 @@ exports.filterMessages = (topic, msg, dictionaries, callback) ->
     return false unless typeof point.value is 'boolean'
     # We're only interested in booleans we have a previous state for
     if typeof booleanStates[point.id] is 'undefined'
-      booleanStates[point.id] = point.value
+      booleanStates[point.id] =
+        value: point.value
+        timestamp: point.timestamp
       return false
     # We're only interested in booleans that change state
-    return false if booleanStates[point.id] is point.value
+    return false if booleanStates[point.id].value is point.value
     true
   ).map (point) ->
-    prevState = booleanStates[point.id]
-    booleanStates[point.id] = point.value
+    prevState = booleanStates[point.id].value
+    booleanStates[point.id] =
+      value: point.value
+      timestamp: point.timestamp
     return prevPoint =
       id: point.id
       value: prevState
