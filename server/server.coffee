@@ -38,7 +38,7 @@ class Server
       if req.query.timestamp
         res.json cbeam.latestState req.params.pointId
         return
-      state = cbeam.latestState(req.params.pointId).value
+      state = cbeam.latestState req.params.pointId
       if typeof state?.value isnt 'undefined'
         res.json state.value
         return
