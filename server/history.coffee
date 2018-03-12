@@ -47,6 +47,7 @@ class History
     unless measurement
       return callback new Error "Measurement #{point.id} not defined"
     return callback() unless measurement.options.persist
+    return callback() if Number.isNaN point?.value
 
     @client.writePoints([
       measurement: @prepareId point.id
@@ -73,6 +74,7 @@ class History
           value: point.value
     ).filter (point) ->
       return false unless point?.measurement
+      return false if Number.isNaN point?.fields?.value
       true
     @client.writePoints(pts)
     .then ->
