@@ -123,6 +123,9 @@ exports.handleConnection = (server, socket) ->
   socket.on 'close', ->
     server.listeners = server.listeners.filter (l) ->
       l isnt notify
+  socket.on 'error', ->
+    server.listeners = server.listeners.filter (l) ->
+      l isnt notify
 
   # Register listener
   server.listeners.push notify
