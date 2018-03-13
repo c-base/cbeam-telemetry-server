@@ -57,7 +57,7 @@ exports.filterMessages = (topic, msg, dictionaries, callback) ->
   unless handlers.length
     return callback [] unless unhandled.indexOf(topic) is -1
     unhandled.push topic
-    console.log "Unhandled key #{topic}: #{JSON.stringify(value)}"
+    console.log "Unhandled key #{topic}"
     return callback []
   points = handlers.map (handler) ->
     return message =
