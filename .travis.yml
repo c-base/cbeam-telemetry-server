@@ -3,6 +3,7 @@ dist: trusty
 sudo: false
 node_js:
 - '6'
+- '10'
 services:
 - docker
 install:
