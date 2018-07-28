@@ -35,5 +35,8 @@
   },
   "devDependencies": {
     "openmct": "git://github.com/nasa/openmct.git#v0.13.3"
+  },
+  "config": {
+    "unsafe-perm": true
   }
 }
