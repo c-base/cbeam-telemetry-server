@@ -14,7 +14,9 @@ script:
 - cp -R node_modules/openmct/dist openmct
 # Prepare cross-compiling environment if targeting ARM
 - if [ "$TARGET" == "raspberrypi3" ]; then docker run --rm --privileged multiarch/qemu-user-static:register --reset; fi
-# Build Docker image and start the whole service
+# Build the Docker image
+- docker build -t $DOCKER_IMAGE -f $DOCKER_FILE .
+# Start the whole service
 - docker-compose up -d
 deploy:
   -
@@ -28,6 +30,6 @@ env:
   - secure: 3FSWAq3lxmiVWxfBaJ+fzoaYCiJwDViWTTLjP8f3P0qAp27aY4CvG/i0UJ9IHYlnwqfYi/JNkP914RTPVspVUDcVnep0Lpkg0xuuAxqFRGnYy/evC/UprRNVVd1asduGeFSEKfFiT1ka2NsPLEKtsrrKDHQeoCxinsPTbRauVYq37TCSSft0NObmkvSLwZ7nq5+l8x7guL+3xRNA62zSRbXfbhiXsR8QPPZd+885qPSOYcAwvIujXVn5IVyd8Ni4DFUEpizPYgx5+PEekuTbErjHin6qV7VWQT1nvrLqy6B6SEjFI9Hp9QHdD48/1Sp3Obv6WOMVbwA/S5QKNdMUMNwwZ7De+pfqDlH6PQWOnA6N/CEySOYkV20zpwL9EY0hix9R44M6bWYijgJZC9qD6xnDhBwRrNiPacqPPSneTimsQTtMIFOVleWZ+Dm6gw8rCVRitzN+C0iT/JCLQ17oeSSaOtQPOkW6z5uYAVdAv3k0IOesWk/EmEvYStbErDKboLe8MCFtidup9NgCQQ5AWkzSsvVGjWQYCL26jdMMBSOP+aJ0lKoUR3u9JUmaVkkJewb0CJg0xfECnG1OcP2R75xYXi1uK59hCK4fajFQ0W8kWt+eLBN5gNu6yeGViLv9/JJMUimXLiVvUt9sgDxSqX3z3vVERDr3pm+lGvUU1dM=
 matrix:
   include:
-  - env: TARGET=x86 DOCKER_IMAGE=cbase/cbeam-telemetry-server
-  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/raspberrypi3-cbeam-telemetry-server bower_allow_root=true COMPOSE_FILE=docker-compose-raspberrypi3.yml
+  - env: TARGET=x86 DOCKER_IMAGE=cbase/cbeam-telemetry-server DOCKER_FILE=Dockerfile
+  - env: TARGET=raspberrypi3 DOCKER_IMAGE=cbase/raspberrypi3-cbeam-telemetry-server bower_allow_root=true COMPOSE_FILE=docker-compose-raspberrypi3.yml DOCKER_FILE=Dockerfile-raspberrypi3
     sudo: true
