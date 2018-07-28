@@ -15,7 +15,7 @@ script:
 # Prepare cross-compiling environment if targeting ARM
 - if [ "$TARGET" == "raspberrypi3" ]; then docker run --rm --privileged multiarch/qemu-user-static:register --reset; fi
 # Build Docker image and start the whole service
-- travis_wait docker-compose up -d
+- docker-compose up -d
 deploy:
   -
     provider: script
