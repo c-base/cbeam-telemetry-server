@@ -2,7 +2,8 @@ cbeam = require './cbeam'
 history = require './history'
 express = require 'express'
 cors = require 'cors'
-ws = require 'ws'
+http = require 'http'
+ws = require 'websocket'
 
 class Server
   listeners: []
@@ -56,20 +57,25 @@ class Server
       return
 
   start: (callback) ->
-    @wss = new ws.Server
-      port: @config.wss_port
-    @app.listen @config.port, (err) =>
-      return callback err if err
-      cbeam.connect @config, (err, client) =>
+    @wssServer = http.createServer (req, res) ->
+      res.writeHead 404
+      res.end()
+    @wssServer.listen @config.wss_port, (err) =>
+      @wss = new ws.server
+        httpServer: @wssServer
+        autoAcceptConnections: false
+      @app.listen @config.port, (err) =>
         return callback err if err
-        @history.connect (err) =>
+        cbeam.connect @config, (err, client) =>
           return callback err if err
-          @cbeam = client
-          do @subscribe
-          cbeam.announce @cbeam, @config.dictionaries, callback
-          setInterval =>
-            cbeam.announce @cbeam, @config.dictionaries, ->
-          , 30000
+          @history.connect (err) =>
+            return callback err if err
+            @cbeam = client
+            do @subscribe
+            cbeam.announce @cbeam, @config.dictionaries, callback
+            setInterval =>
+              cbeam.announce @cbeam, @config.dictionaries, ->
+            , 30000
 
   subscribe: ->
     # Subscribe to all messages
@@ -92,7 +98,8 @@ class Server
             @points = []
             @chunkSaver = null
           , 10000
-    @wss.on 'connection', (socket) =>
+    @wss.on 'request', (request) =>
+      socket = request.accept null, request.origin
       exports.handleConnection @, socket
 
 exports.handleConnection = (server, socket) ->
@@ -108,11 +115,11 @@ exports.handleConnection = (server, socket) ->
   notify = (msg) ->
     for id, value of subscriptions
       continue unless msg.id is id
-      socket.send JSON.stringify msg
+      socket.sendUTF JSON.stringify msg
 
   # Listen for requests
   socket.on 'message', (message) ->
-    parts = message.split ' '
+    parts = message.utf8Data.split ' '
     handler = handlers[parts[0]]
     unless handler
       console.log "No handler for #{parts[0]}"

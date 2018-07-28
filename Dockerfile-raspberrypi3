@@ -1,4 +1,4 @@
-FROM resin/raspberrypi3-node:6
+FROM resin/raspberrypi3-node:8
 
 # Expose the HTTP port for OpenMCT
 EXPOSE 8080
@@ -16,7 +16,7 @@ WORKDIR /var/cbeam-telemetry-server
 COPY . /var/cbeam-telemetry-server
 
 # Install MsgFlo and dependencies
-RUN npm install
+RUN npm install --only=production
 
 # Set OpenMCT location
 ENV OPENMCT_ROOT openmct

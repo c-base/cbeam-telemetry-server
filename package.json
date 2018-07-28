@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
-    "postinstall": "if [ -z \"$npm_config_production\" ]; then cd node_modules/openmct && npm install && npm run prepare; fi",
+    "build": "cd node_modules/openmct && npm install && npm run prepare",
     "start": "node config/eva.js"
   },
   "repository": {
@@ -22,18 +22,21 @@
   "bugs": {
     "url": "https://github.com/c-base/cbeam-telemetry-server/issues"
   },
-  "homepage": "https://github.com/c-base/cbeam-telemetry-server#readme",
+  "homepage": "https://bergie.iki.fi/blog/nasa-openmct-iot-dashboard/",
   "dependencies": {
-    "coffee-script": "^1.12.1",
+    "coffeescript": "^2.3.1",
     "cors": "^2.8.4",
     "debug": "^3.1.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "influx": "^5.0.7",
     "mqtt": "^2.3.0",
-    "ws": "^3.3.2"
+    "websocket": "^1.0.26"
   },
   "devDependencies": {
-    "openmct": "git://github.com/nasa/openmct.git#dc91a94f0e970cab0d4fd93fba49d95ca8d90ea9"
+    "openmct": "git://github.com/nasa/openmct.git#v0.13.3"
+  },
+  "config": {
+    "unsafe-perm": true
   }
 }

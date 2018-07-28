@@ -8,12 +8,15 @@ This is a telemetry server for connecting the NASA [OpenMCT](https://nasa.github
 ## Installation
 
 * Install the dependencies with `npm install`
+* Build OpenMCT with `npm run build`
 
 ## Running
 
 * Start the service with `npm start`
 
 If you want to change the MQTT broker address, set the `MSGFLO_BROKER` environment variable before starting the service.
+
+Read more in <https://bergie.iki.fi/blog/nasa-openmct-iot-dashboard/>.
 
 ## Adding information sources
 
