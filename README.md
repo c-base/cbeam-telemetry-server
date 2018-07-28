@@ -15,6 +15,8 @@ This is a telemetry server for connecting the NASA [OpenMCT](https://nasa.github
 
 If you want to change the MQTT broker address, set the `MSGFLO_BROKER` environment variable before starting the service.
 
+Read more in <https://bergie.iki.fi/blog/nasa-openmct-iot-dashboard/>.
+
 ## Adding information sources
 
 c-beam topics are mapped to OpenMCT data in the installation's runner file in `config/`.

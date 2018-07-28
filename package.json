@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/c-base/cbeam-telemetry-server/issues"
   },
-  "homepage": "https://github.com/c-base/cbeam-telemetry-server#readme",
+  "homepage": "https://bergie.iki.fi/blog/nasa-openmct-iot-dashboard/",
   "dependencies": {
     "coffee-script": "^1.12.1",
     "cors": "^2.8.4",
