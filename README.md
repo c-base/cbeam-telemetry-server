@@ -8,6 +8,7 @@ This is a telemetry server for connecting the NASA [OpenMCT](https://nasa.github
 ## Installation
 
 * Install the dependencies with `npm install`
+* Build OpenMCT with `npm run build`
 
 ## Running
 
