@@ -8,6 +8,7 @@ services:
 install:
 # Install dependencies and build OpenMCT
 - npm install
+- npm run build
 script:
 # Copy OpenMCT assets into correct location
 - cp -R node_modules/openmct/dist openmct
