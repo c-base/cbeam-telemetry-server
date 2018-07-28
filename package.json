@@ -24,7 +24,7 @@
   },
   "homepage": "https://bergie.iki.fi/blog/nasa-openmct-iot-dashboard/",
   "dependencies": {
-    "coffee-script": "^1.12.1",
+    "coffeescript": "^2.3.1",
     "cors": "^2.8.4",
     "debug": "^3.1.0",
     "ejs": "^2.5.6",
