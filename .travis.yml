@@ -16,9 +16,12 @@ script:
 - if [ "$TARGET" == "raspberrypi3" ]; then docker run --rm --privileged multiarch/qemu-user-static:register --reset; fi
 # Build Docker image and start the whole service
 - docker-compose up -d
-after_success:
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  docker push "$DOCKER_IMAGE"; fi
+deploy:
+  -
+    provider: script
+    script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && docker push "$DOCKER_IMAGE"
+    on:
+      branch: master
 env:
   global:
   - secure: ZbH41UJz5qvJqA8nr0ijY4YRT4n23s+j5YS0THUkMtH2AM8S+RIjqLm7ZTi1iGJCzPHh2Pl7NdC9qcZ/f2Cy64ZLRbWaZ46TAkzbevqrOKvDoGNa5cPvx2NYtDGbyxSSrRjo1+nTx4TVkPPYyq6AYZ4Z9GIvIUDoZIo/v4ie5I9hQhjTR6r777AHqLcjWWpAYPkPhqRPHoEldaQu2XV+A4J4/eIBAbUipkDBtBpXg+Xv05mlQz+srWv5BQizYhxlyZaaeFb5BMp2dCofXBvM0daWdS0Iaeceuid/FRe8vyp0AOUEWh/knr0svNY1SI1yauXxfeEbqz0sTrrR/PzGy0l1a5+q69l47vvsXE49n09/Rr0msakUFixnd0XLYEEDzEdrpgWk0BBL0KBrVouCv6l1+5Sxka9juEh81en059dJWaIYUqeiMGbkyYnYdYIT2L0sUMDVFw7vRaP2Z3e+g5fMrS2LhVi5ua6oMQo5qxqqbc9KbG1qfOel0oKYG6vszlTfDHPC46aO95BZdTpxkgz8l7noz74wa30rcSTRiwmEiCN5Cp5MwyJHKkJuWaEj9/eHcTI8HTWoIeiwuTty6E0V5cu0V+cHaCRPS2nZQgefBzVdGIfyyZrVLw2TEvoUmYxh5JZWAyUZus+ZpqoV5eBIWquBe95zajGHd/0C5Nc=
