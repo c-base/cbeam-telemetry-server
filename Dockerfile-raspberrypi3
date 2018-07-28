@@ -5,6 +5,8 @@ EXPOSE 8080
 # Export the Websocket port for OpenMCT live telemetry
 EXPOSE 8082
 
+# Reduce npm install verbosity, overflows Travis CI log view
+ENV NPM_CONFIG_LOGLEVEL warn
 # Install only production dependencies since we're copying OpenMCT from outside
 ENV NODE_ENV production
 
