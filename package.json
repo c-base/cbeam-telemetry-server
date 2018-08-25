@@ -30,7 +30,7 @@
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "influx": "^5.0.7",
-    "mqtt": "^2.3.0",
+    "mqtt": "2.18.5",
     "websocket": "^1.0.26"
   },
   "devDependencies": {
