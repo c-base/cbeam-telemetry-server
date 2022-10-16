@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test",
-    "build": "cd node_modules/openmct && npm install && npm run prepare",
+    "build": "cp patched-openmct-package.json node_modules/openmct/package.json && cd node_modules/openmct && npm install && npm install --dev && npm run prepare",
     "start": "node config/eva.js"
   },
   "repository": {
@@ -31,10 +31,10 @@
     "express": "^4.15.3",
     "influx": "^5.0.7",
     "mqtt": "^2.3.0",
-    "websocket": "^1.0.26"
+    "websocket": "^1.0.26",
+    "openmct": "git+https://github.com/nasa/openmct.git#v0.13.3"
   },
   "devDependencies": {
-    "openmct": "git://github.com/nasa/openmct.git#v0.13.3"
   },
   "config": {
     "unsafe-perm": true

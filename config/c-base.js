@@ -102,6 +102,7 @@ station.addMeasurement('load_high', 'powermon.load_high', [
 ], {
   topic: 'system/powermon/load_high'
 });
+/*
 station.addMeasurement('kdg_rx', 'echelon.kdg.rx', [
   {
     units: 'bytes',
@@ -150,6 +151,7 @@ station.addMeasurement('ipb_tx', 'echelon.ipb.tx', [
 }, function (traffic) {
   return traffic.interfaces[1].tx;
 });
+*/
 station.addMeasurement('vacuum', 'device.vacuum', [
   {
     units: 'on',

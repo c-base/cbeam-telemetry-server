@@ -17,6 +17,8 @@ COPY . /var/cbeam-telemetry-server
 
 # Install MsgFlo and dependencies
 RUN npm install --only=production
+RUN npm run build 
+RUN cp -rf ./node_modules/openmct/dist ./openmct
 
 # Set OpenMCT location
 ENV OPENMCT_ROOT openmct
